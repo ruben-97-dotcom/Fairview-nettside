@@ -350,7 +350,7 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 .ssteps-fill{height:0;background:var(--brand);box-shadow:0 0 12px rgba(23,149,90,.6)}
 .sstep{min-height:80vh;display:flex;align-items:center}
 .sstep:first-of-type{min-height:62vh;align-items:flex-start;padding-top:8vh}
-.sstep:last-child{min-height:88vh;padding-bottom:28vh}
+.sstep:last-child{min-height:88vh;padding-bottom:70vh}
 .sstep-card{padding:26px 26px 24px;border-radius:22px;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);opacity:.3;transform:translateY(18px) scale(.97);transition:opacity .5s,transform .7s var(--ease),border-color .4s,box-shadow .4s;cursor:pointer}
 .sstep.on .sstep-card{opacity:1;transform:none;border-color:color-mix(in srgb,var(--brand) 55%,var(--border));box-shadow:0 20px 44px -22px rgba(23,149,90,.55)}
 .sstep-top{display:flex;align-items:center;gap:12px;margin-bottom:16px}
@@ -1758,6 +1758,12 @@ footer .logo{color:var(--dk-text);font-size:17px}
         phone.position.copy(PH.pos); phone.position.y += reduce ? 0 : Math.sin(t * 1.2) * 1.2;
         phone.scale.setScalar(cfg.eye4 ? 0.8 - 0.42 * w[4] : 0.8 + 0.45 * w[4]); phone.quaternion.copy(cam.quaternion);
         this.hideLabels = false;
+        if (cfg.eye4 && cam.aspect >= 0.9){
+          cam.getWorldDirection(fwd); var rt = new V().crossVectors(fwd, cam.up).normalize();
+          var lp = cam.position.clone().addScaledVector(fwd, 46).addScaledVector(rt, -6.5);
+          phone.position.lerp(lp, w[4]); phone.scale.setScalar(0.8 - 0.26 * w[4]);
+          this.hideLabels = w[4] > 0.5;
+        }
         if (cfg.eye4 && cam.aspect < 0.9){
           cam.getWorldDirection(fwd); var sp = cam.position.clone().addScaledVector(fwd, 40);
           phone.position.lerp(sp, w[4]);
