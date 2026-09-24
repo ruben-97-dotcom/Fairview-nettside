@@ -1214,7 +1214,7 @@ footer .logo{color:var(--dk-text);font-size:17px}
     fwHalf: function(s){ return 15 + 2.5 * Math.sin(s * .045) + 3 * smooth(200, 260, s) - 4 * smooth(300, 340, s); },
     height: function(x, z){ return 13 * Math.exp(-Math.pow(z - 25, 2) / 1400) * Math.exp(-x * x / 39200) - 3.5 * Math.exp(-Math.pow(z + 70, 2) / 9800); },
     bunkers: function(c){ return [bk(c.pointAt(232, c.fwHalf(232) - 1), 8, 5), bk(c.pointAt(292, -c.fwHalf(292) + .5), 7, 5), { x: c.G.x - 15, z: c.G.z + 4, rx: 6, rz: 9 }, { x: c.G.x + 14, z: c.G.z + 6, rx: 5, rz: 8 }, { x: c.G.x + 3, z: c.G.z - 18, rx: 9, rz: 4 }]; },
-    pond: function(c){ var p = c.pointAt(205, -(c.fwHalf(205) + 30)); return { x: p.x, z: p.z, rx: 24, rz: 34 }; },
+    pond: function(c){ var p = c.pointAt(205, -(c.fwHalf(205) + 32)); return { x: p.x, z: p.z, rx: 15, rz: 26 }; },   // holder seg klar av stien (som går 9 m utenfor fairway)
     unit: function(c){ var u = c.pointAt(238, c.fwHalf(238) + 24), a = c.pointAt(c.sAtZ(25), 0); return { x: u.x, z: u.z, aim: { x: a.x, y: c.hAt(a.x, a.z) + 2, z: a.z } }; },
     footprint: function(c){ var k = c.sAtZ(25) - 8; return [c.pointAt(k, -(c.fwHalf(k) + 9)), c.pointAt(k, c.fwHalf(k) + 9), c.pointAt(222, c.fwHalf(222) + 4), c.pointAt(222, -(c.fwHalf(222) + 10))]; },
     group: function(c){ var s = c.sAtDist(172); return [c.pointAt(s, 1.5), c.pointAt(s + 5, -4), c.pointAt(s + 9, 3.5)]; },
