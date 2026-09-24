@@ -381,6 +381,18 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
   .h3-prog{top:calc(78px + env(safe-area-inset-top,0px));left:24px;right:24px;border-radius:3px;overflow:hidden}
   .h3-meta{display:none}
 }
+@media (min-width:1001px){                                 /* PC: modellen fyller hele skjermen, stegene flyter til høyre */
+  .scrolly{display:block;position:relative}
+  .scrolly-stage{position:sticky;top:0;height:100vh;height:100svh;width:100vw;margin-left:calc(50% - 50vw);z-index:1}
+  .scrolly-stage .hole3d{border-radius:0;border:0;box-shadow:none}
+  .ssteps{position:relative;z-index:2;margin-top:-100vh;margin-top:-100svh;width:min(430px,34vw);margin-left:auto;pointer-events:none}
+  .ssteps::before,.ssteps-fill{display:none}
+  .sstep:first-of-type{padding-top:18vh}
+  .sstep-card{pointer-events:auto;background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 18px 40px -18px rgba(0,0,0,.45);opacity:.55}
+  .h3-prog{top:84px;left:max(24px,calc(50vw - var(--wrap) / 2 + 24px));right:max(24px,calc(50vw - var(--wrap) / 2 + 24px));border-radius:3px;overflow:hidden}
+  .h3-step{top:98px;left:max(24px,calc(50vw - var(--wrap) / 2 + 24px))}
+  .h3-meta{left:max(24px,calc(50vw - var(--wrap) / 2 + 24px));right:max(24px,calc(50vw - var(--wrap) / 2 + 24px));bottom:20px}
+}
 @media (prefers-reduced-motion:reduce){.sstep-card{transition:none;transform:none}}
 .steps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .step{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:16px 18px;border-radius:18px;border:1px solid var(--border);background:var(--card);cursor:pointer;transition:border-color .3s,box-shadow .3s,transform .3s var(--ease);text-align:left;font:inherit;color:inherit;width:100%}
@@ -1205,7 +1217,7 @@ footer .logo{color:var(--dk-text);font-size:17px}
   }
 
   var HOLE = {
-    hideGroup4: true, liveApp: true,
+    hideGroup4: false, liveApp: true,
     seed: 20260922, par: 4, camLabel: 'Kamerapunkt', eye4: true, unitScale: 1.3, backLane: 40,
     pts: [[0, 178], [3, 118], [10, 48], [7, -24], [-7, -92], [-19, -142], [-28, -172]],
     tee: { lift: 1.1 }, green: { r: 15, lift: 0.9 }, fwStart: 85, teeClear: 30,
@@ -1231,7 +1243,7 @@ footer .logo{color:var(--dk-text);font-size:17px}
         (function(v){ v.th += c.portrait ? 0.1 : 0.28; return v; })(eyeView(ahead, c.unitP, (c.headY - c.unitP.y) + 3.5, 26)),
         { t: c.unitTop.clone().add(new V(0, 14, 0)), r: 150, th: behind + 1.1, ph: 1.08 },
         { t: c.groupC.clone().add(new V(0, 3, 0)), r: 150, th: thFrom(c.groupC, c.unitP) - 0.35, ph: 1.0 },
-        (function(){ var d = new V(c.TP.x - crest.x, 0, c.TP.z - crest.z).normalize(); return eyeView(crest, new V(c.TP.x + d.x * 17, c.TP.y, c.TP.z + d.z * 17), 6, 0); })()
+        (function(){ var d = new V(c.TP.x - crest.x, 0, c.TP.z - crest.z).normalize(); return eyeView(crest, new V(c.TP.x + d.x * 6, c.TP.y, c.TP.z + d.z * 6), 1.75, 0); })()   // midt på teestedet, i øyehøyde
       ];
     }
   };
@@ -1889,7 +1901,11 @@ footer .logo{color:var(--dk-text);font-size:17px}
     /* ---- detaljer ---- */
     var std = function(hex, o){ o = o || {}; o.color = lin(hex); if (o.roughness === undefined) o.roughness = .7; return new T.MeshStandardMaterial(o); };
     function mesh(geo, mat, x, y, z){ var m = new T.Mesh(geo, mat); m.position.set(x || 0, y || 0, z || 0); m.castShadow = true; m.receiveShadow = true; return m; }
-    [-3.5, 3.5].forEach(function(dx){ var tm = mesh(new T.SphereGeometry(0.13, 14, 10), std('#e8c53a', { roughness: .45 }), TX + dx, teeH + 0.1, TZ - 5); tm.scale.y = 0.8; scene.add(tm); });
+    var tAim = pointAt(Math.min(TOTAL, 150), 0), tdx = tAim.x - TX, tdz = tAim.z - TZ, tdl = Math.hypot(tdx, tdz); tdx /= tdl; tdz /= tdl;
+    [-2.4, 2.4].forEach(function(sd){                       // teemerker foran på teestedet, vinkelrett på spilleretningen
+      var mx = TX + tdx * 7 - tdz * sd, mz = TZ + tdz * 7 + tdx * sd, tm = mesh(new T.SphereGeometry(0.14, 16, 12), std('#e8c53a', { roughness: .45 }), mx, hAt(mx, mz) + 0.1, mz);
+      tm.scale.y = 0.8; scene.add(tm);
+    });
     var wood = std('#7c5f45', { roughness: .85 }), bench = new T.Group();       // benk ved teestedet
     bench.add(mesh(new T.BoxGeometry(1.7, 0.05, 0.42), wood, 0, 0.46, 0), mesh(new T.BoxGeometry(1.7, 0.3, 0.04), wood, 0, 0.72, -0.2));
     [-0.7, 0.7].forEach(function(bx){ bench.add(mesh(new T.BoxGeometry(0.06, 0.46, 0.4), std('#3a3d3a', { metalness: .5, roughness: .5 }), bx, 0.23, 0)); });
@@ -2174,7 +2190,8 @@ footer .logo{color:var(--dk-text);font-size:17px}
         this.hideLabels = false;
         if (cfg.eye4 && cam.aspect >= 0.9){
           cam.getWorldDirection(fwd); var rt = new V().crossVectors(fwd, cam.up).normalize();
-          var lp = cam.position.clone().addScaledVector(fwd, 46).addScaledVector(rt, -6.5);
+          var tanH = Math.tan(cam.fov * Math.PI / 360) * cam.aspect, half = 4.32 / (46 * tanH), mark = (2.4 / 13) / tanH;   // teemerkene står ca. 13 m foran, 2,4 m til siden
+          var lp = cam.position.clone().addScaledVector(fwd, 46).addScaledVector(rt, -Math.max(0.6, mark + half + 0.04) * 46 * tanH);
           phone.position.lerp(lp, w[4]); phone.scale.setScalar(0.8 - 0.26 * w[4]);
           this.hideLabels = w[4] > 0.5;
         }
@@ -2225,7 +2242,7 @@ footer .logo{color:var(--dk-text);font-size:17px}
       if (drag.on && goal){
         var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
         if (Math.abs(dx) + Math.abs(dy) > 2) toUser();
-        goal.th -= dx * 0.006; goal.ph = clamp(goal.ph - dy * 0.004, 0.35, 1.45);
+        goal.th -= dx * 0.006; goal.ph = clamp(goal.ph - dy * 0.004, 0.35, 1.75);
         drag.x = e.clientX; drag.y = e.clientY;
       }
     });
@@ -2257,14 +2274,14 @@ footer .logo{color:var(--dk-text);font-size:17px}
       var th = cur.th + hover.x * 0.32 + (reduce || user ? 0 : Math.sin(t * 0.13) * 0.06);
       var ph = clamp(cur.ph - hover.y * 0.08, 0.3, 1.9);
       cam.position.set(cur.t.x + cur.r * Math.sin(ph) * Math.sin(th), cur.t.y + cur.r * Math.cos(ph), cur.t.z + cur.r * Math.sin(ph) * Math.cos(th));
-      var floor = world.hAt(cam.position.x, cam.position.z) + 2; if (cam.position.y < floor) cam.position.y = floor;
+      var floor = world.hAt(cam.position.x, cam.position.z) + 1.6; if (cam.position.y < floor) cam.position.y = floor;
       cam.lookAt(cur.t);
       world.update(t, w, cam);
       renderer.render(world.scene, cam);
       var cw = wrap.clientWidth, ch = wrap.clientHeight;
       for (var li = 0; li < world.labels.length; li++){
         var lb = world.labels[li]; tv.copy(lb.pos).project(cam);
-        if (!lb.show || world.hideLabels || tv.z > 1 || Math.abs(tv.x) > 1.1 || Math.abs(tv.y) > 1.1){ lb.el.style.opacity = 0; continue; }
+        if (!lb.show || (world.hideLabels && !user) || tv.z > 1 || Math.abs(tv.x) > 1.1 || Math.abs(tv.y) > 1.1){ lb.el.style.opacity = 0; continue; }
         lb.el.style.opacity = 1;
         lb.el.style.transform = 'translate(' + ((tv.x * .5 + .5) * cw).toFixed(1) + 'px,' + ((-tv.y * .5 + .5) * ch).toFixed(1) + 'px) translate(-50%,-100%)';
       }
@@ -2287,7 +2304,7 @@ footer .logo{color:var(--dk-text);font-size:17px}
         goal = { t: a.t.clone().lerp(b.t, e), r: a.r + (b.r - a.r) * e, th: a.th + angTo(a.th, b.th) * e, ph: a.ph + (b.ph - a.ph) * e };
       },
       rotate: function(d){ if (!goal) return; toUser(); goal.th += d; },
-      tilt: function(d){ if (!goal) return; toUser(); goal.ph = clamp(goal.ph + d, 0.35, 1.45); },
+      tilt: function(d){ if (!goal) return; toUser(); goal.ph = clamp(goal.ph + d, 0.35, 1.75); },
       zoom: function(f){ if (!goal) return; toUser(); goal.r = clamp(goal.r * f, 18, 800); },
       moveTo: function(u){
         if (!world) return; toUser();
