@@ -471,6 +471,12 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 .unit-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:center}
 .unit-fig{background:radial-gradient(ellipse at 50% 30%,var(--glow),transparent 70%),var(--card);border:1px solid var(--border);border-radius:24px;padding:28px;box-shadow:var(--shadow-lg);display:flex;justify-content:center}
 .unit-fig svg{width:100%;max-width:300px;height:auto}
+.unit-fig.unit-photo{margin:0;padding:0;display:block;position:relative;overflow:hidden;background:var(--card)}
+.unit-photo img{display:block;width:100%;height:auto}
+.unit-photo svg{position:absolute;inset:0;width:100%;max-width:none;height:100%}
+.unit-photo circle{fill:#12784a;stroke:#fff;stroke-width:4;filter:drop-shadow(0 3px 6px rgba(0,0,0,.45))}
+.unit-photo text{fill:#fff;font:800 26px ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;text-anchor:middle}
+.unit-photo .lead-line{stroke:#fff;stroke-width:3;stroke-linecap:round;filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))}
 .unit-list{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .unit-list li{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:16px;border-radius:16px;border:1px solid var(--border);background:var(--bg)}
 .unit-list .n{width:28px;height:28px;border-radius:50%;background:var(--brand-strong);color:#fff;font-size:14px;font-weight:700;display:grid;place-items:center}
@@ -572,7 +578,7 @@ footer .logo{color:var(--dk-text);font-size:17px}
   .priv-list li{padding:16px;grid-template-columns:42px 1fr;gap:12px}
   .priv-list .ic{width:42px;height:42px}
   .unit-fig{padding:18px}
-  .unit-fig svg{max-width:200px}
+  .unit-fig:not(.unit-photo) svg{max-width:200px}
   .unit-list{margin-top:22px;gap:10px}
   .start li{padding:20px}
   .start-cta{display:grid;grid-template-columns:1fr;gap:10px}
@@ -1001,33 +1007,16 @@ footer .logo{color:var(--dk-text);font-size:17px}
 <!-- KAMERAPUNKTET -->
 <section class="alt" id="kamerapunktet" aria-labelledby="unit-title">
   <div class="wrap unit-grid">
-    <div class="unit-fig reveal" data-tilt>
-      <svg viewBox="0 0 280 400" role="img" aria-labelledby="unit-t unit-d">
-        <title id="unit-t">Kamerapunktet</title>
-        <desc id="unit-d">En stolpe med solcellepanel på toppen, et kamera på en arm, og et slagfast skap med batteri og 4G-ruter.</desc>
-        <ellipse cx="140" cy="378" rx="110" ry="12" fill="#3e6b2b" opacity=".35"/>
-        <rect x="134" y="52" width="12" height="326" rx="3" fill="#7a8f80"/>
-        <g transform="rotate(-14 140 50)">
-          <rect x="64" y="30" width="152" height="46" rx="5" fill="#27465a" stroke="#1c2720" stroke-width="2"/>
-          <g stroke="#3d6f8e" stroke-width="1.5"><path d="M102 30v46M140 30v46M178 30v46M64 53h152"/></g>
-        </g>
-        <rect x="146" y="120" width="32" height="8" rx="2" fill="#7a8f80"/>
-        <rect x="170" y="106" width="58" height="30" rx="8" fill="#f4f8f4" stroke="#5c7565" stroke-width="2"/>
-        <rect x="166" y="102" width="64" height="8" rx="4" fill="#d4e0d7"/>
-        <circle cx="222" cy="121" r="9" fill="#0d1c13"/><circle cx="224" cy="119" r="3" fill="#3d6f8e"/>
-        <rect x="92" y="200" width="96" height="112" rx="10" fill="#d4e0d7" stroke="#5c7565" stroke-width="2"/>
-        <rect x="104" y="214" width="72" height="84" rx="6" fill="none" stroke="#7a8f80" stroke-width="1.5"/>
-        <rect x="112" y="228" width="30" height="20" rx="3" fill="#17955a"/><path d="M118 238h8M130 234v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-        <rect x="112" y="258" width="56" height="10" rx="3" fill="#5c7565"/>
-        <path d="M176 200 L 184 160" stroke="#5c7565" stroke-width="3" stroke-linecap="round"/><circle cx="184" cy="158" r="4" fill="#5c7565"/>
-        <g font-family="ui-sans-serif,system-ui,sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">
-          <circle cx="44" cy="46" r="14" fill="#12784a"/><text x="44" y="51">1</text>
-          <circle cx="250" cy="121" r="14" fill="#12784a"/><text x="250" y="126">2</text>
-          <circle cx="66" cy="238" r="14" fill="#12784a"/><text x="66" y="243">3</text>
-          <circle cx="210" cy="160" r="14" fill="#12784a"/><text x="210" y="165">4</text>
-        </g>
+    <figure class="unit-fig unit-photo reveal" data-tilt>
+      <img src="{{PHOTO:kamerapunkt}}" width="820" height="1098" loading="lazy" decoding="async" alt="Kamerapunktet i skogkanten ved en golfbane: en galvanisert stolpe med solcellepanel på toppen (1), et kamera på en arm (2), et grått slagfast skap med batteri og elektronikk (3) og en 4G-antenne på stolpen (4).">
+      <svg viewBox="0 0 820 1098" aria-hidden="true">
+        <path d="M232 548H306" class="lead-line"/>
+        <g><circle cx="330" cy="118" r="27"/><text x="330" y="127">1</text></g>
+        <g><circle cx="425" cy="378" r="27"/><text x="425" y="387">2</text></g>
+        <g><circle cx="345" cy="705" r="27"/><text x="345" y="714">3</text></g>
+        <g><circle cx="205" cy="548" r="27"/><text x="205" y="557">4</text></g>
       </svg>
-    </div>
+    </figure>
     <div class="reveal">
       <p class="eyebrow">Kamerapunktet</p>
       <h2 class="h2" id="unit-title">Én stolpe. Ingen kabel ut dit.</h2>

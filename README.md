@@ -13,6 +13,7 @@ Salgsside for Fairview: kamera og app for blinde golfhull, rettet mot norske gol
 | `kilde/bygg.cjs` | Byggeskript som baker inn bilder og skript |
 | `kilde/vendor/three.min.js` | three.js r128 (MIT-lisens) |
 | `bilder/` | Skjermbilder fra live-demoen (`.webp` brukes på siden, `.png` er originalene) |
+| `bilder/kamerapunkt.*` | Foto av kamerapunktet (`.png` er originalen, `.webp` er beskåret til høydeformat og brukes på siden) |
 
 ## Endre siden
 
