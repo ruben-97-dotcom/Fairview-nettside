@@ -1,6 +1,6 @@
-# Fairview – nettside
+# SafeGolf – nettside
 
-Salgsside for Fairview: kamera og app for blinde golfhull, rettet mot norske golfklubber. Leveres av Syntriq AS.
+Salgsside for SafeGolf (tidligere Fairview): kamera og app for blinde golfhull, rettet mot norske golfklubber. Leveres av Syntriq AS.
 
 `index.html` er hele nettsiden i én fil – all CSS, JavaScript, bilder og 3D-biblioteket (three.js) er bakt inn. Den kan åpnes direkte i nettleseren eller legges ut på hvilken som helst statisk hosting (GitHub Pages, Vercel, Netlify).
 
@@ -12,6 +12,7 @@ Salgsside for Fairview: kamera og app for blinde golfhull, rettet mot norske gol
 | `kilde/fairview.src.html` | Kildefila som redigeres |
 | `kilde/bygg.cjs` | Byggeskript som baker inn bilder og skript |
 | `kilde/vendor/three.min.js` | three.js r128 (MIT-lisens) |
+| `logo/` | SafeGolf-logopakken (logoer, favicon, app-ikoner, sosiale medier). Se `logo/LES-MEG.txt` for farger og bruk |
 | `bilder/` | Skjermbilder fra live-demoen (`.webp` brukes på siden, `.png` er originalene) |
 | `bilder/kamerapunkt.*` | Foto av kamerapunktet (`.png` er originalen, `.webp` er beskåret til høydeformat og brukes på siden) |
 | `bilder/kameravisning.png`, `bilder/hulloversikt.png`, `bilder/app-hero-light.*` | Kamerabilde av gruppa og oversiktsbilde av hullet, satt inn i app-skjermbildet i toppen (`app-hero-light`) |
@@ -30,6 +31,9 @@ Salgsside for Fairview: kamera og app for blinde golfhull, rettet mot norske gol
 Krever bare Node.js – ingen pakker å installere.
 
 ## Å gjøre før lansering
+
+- Demoen ligger fortsatt på `fairview-pied.vercel.app` og viser det gamle navnet. Bytt lenkene når demoen har fått SafeGolf-navn og ny adresse.
+- Skriften Sora lastes fra Google Fonts. Uten nett faller siden tilbake til systemskrift.
 
 - E-postadressen `post@syntriq.no` i kontaktseksjonen er en plassholder og må byttes ut.
 - Kontaktskjemaet åpner besøkendes e-postprogram (`mailto:`). Ekte innsending krever en skjematjeneste eller et eget endepunkt.

@@ -1,0 +1,43 @@
+SafeGolf – logopakke
+====================
+
+MAPPER
+01-primaerlogo-stablet   Hovedlogoen. Nettside, tilbud, presentasjoner, brosjyrer.
+02-liggende-logo         Nettsideheader, e-postsignatur, maler, smale flater.
+03-symbol                Lyset alene. Kun når navnet står ved siden av.
+04-app-ikoner            iOS (AppIcon-1024 til App Store), Android og PWA.
+05-favicon               Favicon + apple-touch-icon + manifest og kodesnutt til <head>.
+06-sosiale-medier        Profilbilde, delingsbilde (Open Graph) og LinkedIn-banner.
+07-trykk-og-brodering    Énfarge-versjoner (vektor) til broderer og trykkeri.
+
+VARIANTER
+farge     Til lys bakgrunn (mørk tekst).
+negativ   Til mørk bakgrunn (lys tekst).
+svart     Énfarge svart – lysene er hull, fungerer på alle lyse flater.
+hvit      Énfarge hvit – lysene er hull, fungerer over foto og mørke flater.
+
+Alle PNG-er har gjennomsiktig bakgrunn, unntatt ikoner og bilder til sosiale medier.
+SVG og PDF er vektor og kan skaleres fritt. Teksten er gjort om til baner,
+så skriften trenger ikke være installert.
+
+App-ikonet til iOS leveres som kvadrat uten runde hjørner – Apple runder dem selv.
+For små størrelser (favicon) brukes «G + lys», fordi hele ordmerket blir uleselig.
+
+FARGER
+Banegrønn     #0E3B2C   RGB 14 59 44
+Signalgrønn   #3CCB7F   RGB 60 203 127
+Lys           #F4F6F1   RGB 244 246 241
+Nattgrønn     #081F17   RGB 8 31 23
+
+SKRIFT
+Sora (Google Fonts, gratis, OFL-lisens). Logo: ExtraBold 800. Tekst: Regular/SemiBold.
+
+FRISONE OG MINSTESTØRRELSE (forslag)
+Hold fri luft rundt logoen tilsvarende bredden på lyset.
+Stablet: minst 32 px høy på skjerm. Liggende: minst 96 px bred.
+Mindre enn det: bruk favicon-merket («G + lys»).
+
+TIL BRODERER
+Send SVG/PDF fra 07-trykk-og-brodering. Be om at de tre lysene broderes som
+åpne hull, med en fylt prikk i det nederste. Svært små størrelser på caps kan
+kreve at de dempede lysene fjernes – be om prøvebrodering.

@@ -3,26 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Fairview viser live bilde fra de blinde hullene og sier tydelig fra når det er klart å slå. For norske golfklubber.">
-<title>Fairview for golfklubber</title>
+<meta name="description" content="SafeGolf viser live bilde fra de blinde hullene og sier tydelig fra når det er klart å slå. For norske golfklubber.">
+<title>SafeGolf for golfklubber</title>
+<meta name="theme-color" content="#0E3B2C">
+<link rel="icon" href="{{SVGURI:favicon}}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{{PNGURI:apple-touch-icon}}">
+<meta property="og:title" content="SafeGolf for golfklubber">
+<meta property="og:description" content="SafeGolf viser live bilde fra de blinde hullene og sier tydelig fra når det er klart å slå.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#e9f0ea; --surface:#f4f8f4; --card:#ffffff; --border:#d4e0d7;
-  --text:#0d1c13; --muted:#5c7565; --faint:#7a8f80;
-  --brand:#17955a; --brand-strong:#12784a; --brand-soft:#a8edc8;
-  --link:#12784a;
+  --bg:#F4F6F1; --surface:#fbfcf9; --card:#ffffff; --border:#d8e0d4;
+  --text:#0E3B2C; --muted:#5c7565; --faint:#7a8f80;
+  --brand:#3CCB7F; --brand-strong:#0E3B2C; --brand-soft:#3CCB7F;
+  --link:#0E3B2C; --logo-ink:#0E3B2C; --logo-dim:rgba(244,246,241,.22);
   --player:#d98a1f; --you:#3d8bd9;
-  --clear-bg:#e6f3eb; --clear-text:#146b43;
+  --clear-bg:#e1f2e7; --clear-text:#0E3B2C;
   --wait-bg:#f7e9d6; --wait-text:#7a4a0a;
-  --glow:rgba(23,149,90,.10);
-  --shadow:0 1px 2px rgba(13,28,19,.05),0 10px 30px -12px rgba(13,28,19,.14);
-  --shadow-lg:0 2px 6px rgba(13,28,19,.06),0 30px 60px -24px rgba(13,28,19,.30);
+  --glow:rgba(60,203,127,.10);
+  --shadow:0 1px 2px rgba(14,59,44,.05),0 10px 30px -12px rgba(14,59,44,.14);
+  --shadow-lg:0 2px 6px rgba(14,59,44,.06),0 30px 60px -24px rgba(14,59,44,.30);
 
   /* mørke bolker */
-  --dk-bg:#0f1712; --dk-surface:#17211b; --dk-card:#1c2720; --dk-border:#27352c;
-  --dk-text:#e9f0ea; --dk-muted:#9db0a3;
+  --dk-bg:#081F17; --dk-surface:#0c271d; --dk-card:#113024; --dk-border:#1e3d31;
+  --dk-text:#F4F6F1; --dk-muted:#9db0a3;
 
-  --font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --font:"Sora",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   --r-sm:10px; --r:14px; --r-lg:18px; --r-xl:32px;
   --wrap:1180px;
   --ease:cubic-bezier(.2,.7,.2,1);
@@ -30,28 +38,28 @@
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --bg:#0f1712; --surface:#17211b; --card:#1c2720; --border:#27352c;
-    --text:#e9f0ea; --muted:#9db0a3; --faint:#7f9587;
-    --link:#a8edc8;
-    --clear-bg:rgba(23,149,90,.18); --clear-text:#a8edc8;
+    --bg:#081F17; --surface:#0c271d; --card:#113024; --border:#1e3d31;
+    --text:#F4F6F1; --muted:#9db0a3; --faint:#7f9587;
+    --link:#3CCB7F; --logo-ink:#F4F6F1; --logo-dim:rgba(14,59,44,.3); --btn-bg:#3CCB7F; --btn-fg:#081F17; --btn-hover:#5fd896;
+    --clear-bg:rgba(60,203,127,.18); --clear-text:#3CCB7F;
     --wait-bg:rgba(217,138,31,.18); --wait-text:#f2c98f;
-    --glow:rgba(23,149,90,.16);
+    --glow:rgba(60,203,127,.16);
     --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -12px rgba(0,0,0,.5);
     --shadow-lg:0 2px 6px rgba(0,0,0,.3),0 30px 60px -24px rgba(0,0,0,.7);
-    --dk-bg:#09100c; --dk-surface:#111a14; --dk-card:#17211b; --dk-border:#243129;
+    --dk-bg:#05150f; --dk-surface:#0a2219; --dk-card:#0c271d; --dk-border:#1b382c;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0f1712; --surface:#17211b; --card:#1c2720; --border:#27352c;
-  --text:#e9f0ea; --muted:#9db0a3; --faint:#7f9587;
-  --link:#a8edc8;
-  --clear-bg:rgba(23,149,90,.18); --clear-text:#a8edc8;
+  --bg:#081F17; --surface:#0c271d; --card:#113024; --border:#1e3d31;
+  --text:#F4F6F1; --muted:#9db0a3; --faint:#7f9587;
+  --link:#3CCB7F; --logo-ink:#F4F6F1; --logo-dim:rgba(14,59,44,.3); --btn-bg:#3CCB7F; --btn-fg:#081F17; --btn-hover:#5fd896;
+  --clear-bg:rgba(60,203,127,.18); --clear-text:#3CCB7F;
   --wait-bg:rgba(217,138,31,.18); --wait-text:#f2c98f;
-  --glow:rgba(23,149,90,.16);
+  --glow:rgba(60,203,127,.16);
   --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -12px rgba(0,0,0,.5);
   --shadow-lg:0 2px 6px rgba(0,0,0,.3),0 30px 60px -24px rgba(0,0,0,.7);
-  --dk-bg:#09100c; --dk-surface:#111a14; --dk-card:#17211b; --dk-border:#243129;
+  --dk-bg:#05150f; --dk-surface:#0a2219; --dk-card:#0c271d; --dk-border:#1b382c;
   color-scheme:dark;
 }
 
@@ -78,10 +86,10 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 .alt{background:var(--surface)}
 .band{
   --bg:var(--dk-bg); --surface:var(--dk-surface); --card:var(--dk-card); --border:var(--dk-border);
-  --text:var(--dk-text); --muted:var(--dk-muted); --faint:#7f9587; --link:#a8edc8;
-  --clear-bg:rgba(23,149,90,.18); --clear-text:#a8edc8;
+  --text:var(--dk-text); --muted:var(--dk-muted); --faint:#7f9587; --link:#3CCB7F;
+  --clear-bg:rgba(60,203,127,.18); --clear-text:#3CCB7F;
   --wait-bg:rgba(217,138,31,.18); --wait-text:#f2c98f;
-  --glow:rgba(23,149,90,.22);
+  --glow:rgba(60,203,127,.22);
   --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -12px rgba(0,0,0,.5);
   background:var(--bg);color:var(--text);color-scheme:dark;
 }
@@ -108,8 +116,8 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 .btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 24px;border-radius:14px;font:inherit;font-size:16px;font-weight:650;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:background .2s,border-color .2s,transform .2s var(--ease),box-shadow .2s}
 .btn:hover{transform:translateY(-1px)}
 .btn:active{transform:translateY(1px)}
-.btn-primary{background:var(--brand-strong);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 8px 24px -8px rgba(23,149,90,.6)}
-.btn-primary:hover{background:#0f6940;box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 12px 30px -8px rgba(23,149,90,.7)}
+.btn-primary{background:var(--btn-bg,var(--brand-strong));color:var(--btn-fg,#fff);box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 8px 24px -8px rgba(60,203,127,.6)}
+.btn-primary:hover{background:var(--btn-hover,#155240);box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 12px 30px -8px rgba(60,203,127,.7)}
 .btn-ghost{background:color-mix(in srgb,var(--card) 40%,transparent);color:var(--text);border-color:var(--border)}
 .btn-ghost:hover{border-color:var(--muted)}
 .btn-sm{min-height:40px;padding:0 16px;font-size:15px;border-radius:11px}
@@ -121,7 +129,7 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
   background:color-mix(in srgb,var(--surface) 80%,transparent);border:1px solid color-mix(in srgb,var(--border) 85%,transparent);
   backdrop-filter:saturate(1.5) blur(16px);-webkit-backdrop-filter:saturate(1.5) blur(16px);box-shadow:0 10px 30px -14px rgba(0,0,0,.35)}
 .logo{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:760;font-size:19px;letter-spacing:-.01em}
-.logo-mark{width:30px;height:30px;flex:none}
+.logo-word{width:137px;height:25px;flex:none;color:var(--logo-ink);display:block}
 .nav{display:flex;gap:2px;margin-left:auto}
 .nav a{color:var(--muted);text-decoration:none;font-size:15px;font-weight:550;padding:8px 11px;border-radius:9px;transition:color .15s,background .15s}
 .nav a:hover{color:var(--text);background:color-mix(in srgb,var(--text) 6%,transparent)}
@@ -141,7 +149,7 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 
 /* ---------- hero ---------- */
 .hero{padding-block:150px 48px;overflow:hidden}
-.hero::after{content:"";position:absolute;width:760px;height:760px;right:-120px;top:-60px;border-radius:50%;background:radial-gradient(closest-side,rgba(23,149,90,.30),rgba(23,149,90,0));pointer-events:none}
+.hero::after{content:"";position:absolute;width:760px;height:760px;right:-120px;top:-60px;border-radius:50%;background:radial-gradient(closest-side,rgba(60,203,127,.30),rgba(60,203,127,0));pointer-events:none}
 .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
 .hero h1{font-size:clamp(42px,6.4vw,76px);font-weight:790;letter-spacing:-.035em;line-height:1.02}
 .hero h1 em{font-style:normal;color:var(--brand-soft)}
@@ -157,8 +165,8 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 .stage{position:relative;display:grid;place-items:center;padding:30px 0 50px}
 .p3d{position:relative;width:300px;aspect-ratio:600/1254}
 .p-face{position:absolute;inset:0;width:100%;height:100%;display:block;border-radius:15.5%/7.4%;box-shadow:0 44px 70px -30px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.05)}
-.chip3d{position:absolute;display:flex;align-items:center;gap:9px;padding:11px 14px;border-radius:16px;background:rgba(20,30,24,.9);border:1px solid rgba(168,237,200,.18);color:#e9f0ea;font-size:13.5px;font-weight:620;box-shadow:0 24px 40px -14px rgba(0,0,0,.7);white-space:nowrap;pointer-events:none;animation:float 7s ease-in-out infinite}
-.chip3d svg{width:18px;height:18px;color:#a8edc8;flex:none}
+.chip3d{position:absolute;display:flex;align-items:center;gap:9px;padding:11px 14px;border-radius:16px;background:rgba(20,30,24,.9);border:1px solid rgba(168,237,200,.18);color:#F4F6F1;font-size:13.5px;font-weight:620;box-shadow:0 24px 40px -14px rgba(0,0,0,.7);white-space:nowrap;pointer-events:none;animation:float 7s ease-in-out infinite}
+.chip3d svg{width:18px;height:18px;color:#3CCB7F;flex:none}
 .chip3d small{display:block;font-size:12px;color:#9db0a3;font-weight:500}
 .chip3d .rec{width:8px;height:8px;border-radius:50%;background:#e5484d;box-shadow:0 0 0 4px rgba(229,72,77,.2);animation:pulse 2s ease-in-out infinite}
 .c1{left:-30%;top:60%}
@@ -168,7 +176,7 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 @keyframes float{50%{translate:0 -6px}}
 .pill{display:inline-flex;align-items:center;gap:6px;font-weight:720;font-size:13px;padding:6px 11px;border-radius:999px;white-space:nowrap}
 .pill svg{width:14px;height:14px;flex:none;color:currentColor}
-.pill-clear{background:#e6f3eb;color:#146b43}
+.pill-clear{background:#e1f2e7;color:#0E3B2C}
 .pill-wait{background:#f7e9d6;color:#7a4a0a}
 @keyframes pulse{50%{opacity:.4}}
 
@@ -210,14 +218,14 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 .pb-top{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
 .pb-stat{padding:30px;border-radius:24px;background:var(--dk-bg);color:var(--dk-text);box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
 .pb-stat::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(closest-side,rgba(217,138,31,.28),transparent)}
-.pb-stat-eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#a8edc8;margin-bottom:12px}
+.pb-stat-eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#3CCB7F;margin-bottom:12px}
 .pb-num{font-size:clamp(52px,7vw,80px);font-weight:800;letter-spacing:-.035em;line-height:1;font-variant-numeric:tabular-nums}
 .pb-num span{color:#d98a1f;font-weight:700;margin:0 .05em}
-.pb-num small{font-size:.4em;font-weight:700;color:#a8edc8;letter-spacing:0}
+.pb-num small{font-size:.4em;font-weight:700;color:#3CCB7F;letter-spacing:0}
 .pb-stat-lbl{color:#9db0a3;margin-top:14px;font-size:16px;max-width:40ch}
 .pb-src{margin-top:18px;font-size:13px;color:#7f9587}
 .pb-src a,.pb-quote a{color:inherit;text-decoration-color:currentColor}
-.pb-stat .pb-src a{color:#a8edc8}
+.pb-stat .pb-src a{color:#3CCB7F}
 .pb-sub{margin-top:64px;font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .pb-ways{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .pb-ways li{padding:22px;border-radius:20px;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow)}
@@ -234,10 +242,10 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 .pb-quote figcaption{font-size:13.5px;color:var(--faint)}
 .pb-note{font-size:15px;color:var(--muted);padding-top:14px;border-top:1px solid var(--border)}
 .pb-stat{margin:0}
-.pb-stat blockquote{margin:0;font-size:clamp(24px,2.6vw,32px);font-weight:760;letter-spacing:-.02em;line-height:1.2;padding-left:18px;border-left:4px solid #d98a1f;color:#e9f0ea;position:relative;z-index:1}
+.pb-stat blockquote{margin:0;font-size:clamp(24px,2.6vw,32px);font-weight:760;letter-spacing:-.02em;line-height:1.2;padding-left:18px;border-left:4px solid #d98a1f;color:#F4F6F1;position:relative;z-index:1}
 .pb-stat figcaption{margin-top:16px;font-size:13px;color:#7f9587}
-.pb-stat figcaption a,.pb-dnote a{color:#a8edc8}
-.pb-dnote{margin-top:16px;padding-top:14px;border-top:1px solid #27352c;font-size:14.5px;color:#9db0a3}
+.pb-stat figcaption a,.pb-dnote a{color:#3CCB7F}
+.pb-dnote{margin-top:16px;padding-top:14px;border-top:1px solid #1e3d31;font-size:14.5px;color:#9db0a3}
 .pb-wide{grid-template-columns:auto 1fr;align-items:center;gap:12px 48px}
 .pb-wide-eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--link);margin-bottom:10px}
 .pb-wide .pb-num{color:var(--text)}
@@ -260,7 +268,7 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 .il-legend{list-style:none;margin:10px 4px 0;padding:0;flex-wrap:wrap;gap:6px 16px;font-size:13px;font-weight:600;color:var(--muted)}
 .il-legend li{display:flex;align-items:center;gap:7px}
 .il-legend i{display:block;width:22px;height:0}
-.lg-sight{border-top:2.5px dashed rgba(13,28,19,.6)}
+.lg-sight{border-top:2.5px dashed rgba(14,59,44,.6)}
 .lg-ball{border-top:3px dotted #9db0a3}
 .lg-blind{height:12px!important;width:16px!important;border-radius:3px;background:rgba(217,138,31,.35)}
 @media (max-width:600px){.il-d{display:none!important}.il-m{display:block!important}.il-legend{display:flex!important}.figure{padding:10px;border-radius:18px}}
@@ -279,7 +287,7 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 .safety .prose{font-size:18px}
 .points{display:grid;gap:14px;margin:0;padding:0;list-style:none}
 .point{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:20px;border-radius:18px;background:color-mix(in srgb,var(--card) 85%,transparent);border:1px solid var(--border)}
-.point .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(23,149,90,.16);color:var(--brand-soft)}
+.point .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(60,203,127,.16);color:var(--brand-soft)}
 .point .ic svg{width:21px;height:21px}
 .point h3{font-size:17px;font-weight:700;margin-bottom:4px}
 .point p{color:var(--muted);font-size:15.5px}
@@ -328,27 +336,27 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 .hole3d.grabbing{cursor:grabbing}
 .hole3d canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .h3-labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.h3-label{position:absolute;left:0;top:0;opacity:0;font-size:12px;font-weight:700;padding:5px 10px;border-radius:9px;background:rgba(13,28,19,.84);color:#e9f0ea;white-space:nowrap;transition:opacity .35s;will-change:transform;box-shadow:0 6px 16px -6px rgba(0,0,0,.5)}
-.h3-label::after{content:"";position:absolute;left:50%;bottom:-5px;margin-left:-5px;border:5px solid transparent;border-bottom:0;border-top-color:rgba(13,28,19,.84)}
+.h3-label{position:absolute;left:0;top:0;opacity:0;font-size:12px;font-weight:700;padding:5px 10px;border-radius:9px;background:rgba(14,59,44,.84);color:#F4F6F1;white-space:nowrap;transition:opacity .35s;will-change:transform;box-shadow:0 6px 16px -6px rgba(0,0,0,.5)}
+.h3-label::after{content:"";position:absolute;left:50%;bottom:-5px;margin-left:-5px;border:5px solid transparent;border-bottom:0;border-top-color:rgba(14,59,44,.84)}
 .h3-label.warn{background:#d98a1f;color:#1c1203}.h3-label.warn::after{border-top-color:#d98a1f}
-.h3-label.cam{background:#12784a;color:#fff}.h3-label.cam::after{border-top-color:#12784a}
-.h3-label.dist{background:#fff;color:#0d1c13;font-variant-numeric:tabular-nums}.h3-label.dist::after{border-top-color:#fff}
+.h3-label.cam{background:#0E3B2C;color:#fff}.h3-label.cam::after{border-top-color:#0E3B2C}
+.h3-label.dist{background:#fff;color:#0E3B2C;font-variant-numeric:tabular-nums}.h3-label.dist::after{border-top-color:#fff}
 .h3-meta{position:absolute;left:14px;right:14px;bottom:14px;display:flex;justify-content:space-between;gap:8px;pointer-events:none}
-.h3-meta span{font-size:12px;font-weight:650;padding:6px 10px;border-radius:9px;background:rgba(244,248,244,.88);color:#0d1c13}
+.h3-meta span{font-size:12px;font-weight:650;padding:6px 10px;border-radius:9px;background:rgba(244,248,244,.88);color:#0E3B2C}
 .h3-fallback{display:none}
-.no-gl .h3-fallback{display:grid;place-items:center;position:absolute;inset:0;padding:24px;text-align:center;color:#0d1c13;font-weight:600}
+.no-gl .h3-fallback{display:grid;place-items:center;position:absolute;inset:0;padding:24px;text-align:center;color:#0E3B2C;font-weight:600}
 .scrolly{display:grid;grid-template-columns:1.4fr .6fr;gap:48px;align-items:start}
 .scrolly-stage{position:sticky;top:calc(88px + env(safe-area-inset-top,0px));height:min(680px,calc(100vh - 112px));z-index:2}
 .scrolly-stage .hole3d{height:100%}
 .ssteps{list-style:none;margin:0;padding:0;position:relative}
 .ssteps::before,.ssteps-fill{content:"";position:absolute;left:-26px;top:0;width:2px;border-radius:2px}
 .ssteps::before{bottom:0;background:var(--border)}
-.ssteps-fill{height:0;background:var(--brand);box-shadow:0 0 12px rgba(23,149,90,.6)}
+.ssteps-fill{height:0;background:var(--brand);box-shadow:0 0 12px rgba(60,203,127,.6)}
 .sstep{min-height:80vh;display:flex;align-items:center}
 .sstep:first-of-type{min-height:62vh;align-items:flex-start;padding-top:8vh}
 .sstep:last-child{min-height:88vh;padding-bottom:70vh}
 .sstep-card{padding:26px 26px 24px;border-radius:22px;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);opacity:.3;transform:translateY(18px) scale(.97);transition:opacity .5s,transform .7s var(--ease),border-color .4s,box-shadow .4s;cursor:pointer}
-.sstep.on .sstep-card{opacity:1;transform:none;border-color:color-mix(in srgb,var(--brand) 55%,var(--border));box-shadow:0 20px 44px -22px rgba(23,149,90,.55)}
+.sstep.on .sstep-card{opacity:1;transform:none;border-color:color-mix(in srgb,var(--brand) 55%,var(--border));box-shadow:0 20px 44px -22px rgba(60,203,127,.55)}
 .sstep-top{display:flex;align-items:center;gap:12px;margin-bottom:16px}
 .sstep .ic{width:44px;height:44px;border-radius:12px;background:var(--clear-bg);color:var(--clear-text);display:grid;place-items:center;transition:background .4s,color .4s}
 .sstep.on .ic{background:var(--brand-strong);color:#fff}
@@ -359,9 +367,9 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 .sstep-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
 .sstep-tags span{font-size:12.5px;font-weight:650;padding:5px 10px;border-radius:999px;background:var(--clear-bg);color:var(--clear-text)}
 .h3-prog{position:absolute;left:0;right:0;top:0;height:4px;background:rgba(255,255,255,.3);z-index:2}
-.h3-prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#17955a,#a8edc8);transition:width .25s linear}
-.h3-step{position:absolute;top:16px;left:14px;display:flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border-radius:12px;background:rgba(13,28,19,.84);color:#fff;font-weight:700;font-size:14px;box-shadow:0 8px 20px -10px rgba(0,0,0,.5)}
-.h3-step b{display:grid;place-items:center;min-width:30px;height:30px;border-radius:9px;background:#12784a;font-size:13px;font-variant-numeric:tabular-nums}
+.h3-prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#3CCB7F,#3CCB7F);transition:width .25s linear}
+.h3-step{position:absolute;top:16px;left:14px;display:flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border-radius:12px;background:rgba(14,59,44,.84);color:#fff;font-weight:700;font-size:14px;box-shadow:0 8px 20px -10px rgba(0,0,0,.5)}
+.h3-step b{display:grid;place-items:center;min-width:30px;height:30px;border-radius:9px;background:#0E3B2C;font-size:13px;font-variant-numeric:tabular-nums}
 @media (max-width:1000px){
   .scrolly{display:block;position:relative}
   .scrolly-stage{position:sticky;top:0;height:100vh;height:100svh;margin-inline:-24px;z-index:1}
@@ -398,7 +406,7 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 .step .st{font-size:17px;font-weight:720;margin-bottom:2px;display:flex;gap:8px;align-items:baseline}
 .step .st small{font-size:12px;font-weight:700;color:var(--faint)}
 .step .sd{display:block;color:var(--muted);font-size:15px}
-.step.on{border-color:color-mix(in srgb,var(--brand) 60%,var(--border));box-shadow:0 12px 30px -16px rgba(23,149,90,.55);transform:translateX(-4px)}
+.step.on{border-color:color-mix(in srgb,var(--brand) 60%,var(--border));box-shadow:0 12px 30px -16px rgba(60,203,127,.55);transform:translateX(-4px)}
 .step.on .ic{background:var(--brand-strong);color:#fff}
 .camtypes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
 .camtype{display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:center;padding:18px;border-radius:20px;background:var(--bg);border:1px solid var(--border)}
@@ -425,13 +433,13 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 @media (max-width:1000px){
   .ph-tabs{display:flex;gap:4px;padding:4px;margin:0 auto 22px;max-width:420px;border-radius:14px;background:var(--surface);border:1px solid var(--border)}
   .ph-tab{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:42px;white-space:nowrap;padding:0 6px;border:0;border-radius:10px;background:transparent;font:inherit;font-size:14.5px;font-weight:700;color:var(--muted);cursor:pointer}
-  .ph-tab[aria-selected="true"]{background:var(--card);color:var(--text);box-shadow:0 4px 12px -6px rgba(13,28,19,.3)}
+  .ph-tab[aria-selected="true"]{background:var(--card);color:var(--text);box-shadow:0 4px 12px -6px rgba(14,59,44,.3)}
   .ph-tab i{width:9px;height:9px;border-radius:50%;flex:none}
-  .d-clear{background:#17955a}.d-wait{background:#d98a1f}.d-none{background:#9db0a3}
+  .d-clear{background:#3CCB7F}.d-wait{background:#d98a1f}.d-none{background:#9db0a3}
 }
 .phones{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;justify-items:center}
 .phones figure{margin:0;display:grid;justify-items:center;gap:26px}
-.shot{display:block;width:280px;max-width:100%;height:auto;border-radius:15.5%/7.4%;box-shadow:0 40px 60px -30px rgba(13,28,19,.45),0 2px 6px rgba(13,28,19,.12);transition:transform .7s var(--ease)}
+.shot{display:block;width:280px;max-width:100%;height:auto;border-radius:15.5%/7.4%;box-shadow:0 40px 60px -30px rgba(14,59,44,.45),0 2px 6px rgba(14,59,44,.12);transition:transform .7s var(--ease)}
 .phones figcaption{text-align:center;max-width:30ch}
 .phones figcaption b{display:inline-flex;margin-bottom:8px}
 .phones figcaption span{display:block;color:var(--muted);font-size:15px}
@@ -447,7 +455,7 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 .benefit{position:relative;overflow:hidden;background:color-mix(in srgb,var(--card) 88%,transparent);border:1px solid var(--border);border-radius:22px;padding:28px 26px}
 .benefit::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(168,237,200,.12),transparent 42%);opacity:0;transition:opacity .3s;pointer-events:none}
 .benefit:hover::before{opacity:1}
-.benefit .ic{width:46px;height:46px;border-radius:13px;background:rgba(23,149,90,.16);color:var(--brand-soft);display:grid;place-items:center;margin-bottom:20px}
+.benefit .ic{width:46px;height:46px;border-radius:13px;background:rgba(60,203,127,.16);color:var(--brand-soft);display:grid;place-items:center;margin-bottom:20px}
 .benefit .ic svg{width:22px;height:22px}
 .benefit h3{font-size:19px;font-weight:720;margin-bottom:8px}
 .benefit p{color:var(--muted);font-size:15.5px}
@@ -471,7 +479,7 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 .unit-fig.unit-photo{margin:0;padding:0;display:block;position:relative;overflow:hidden;background:var(--card)}
 .unit-photo img{display:block;width:100%;height:auto}
 .unit-photo svg{position:absolute;inset:0;width:100%;max-width:none;height:100%}
-.unit-photo circle{fill:#12784a;stroke:#fff;stroke-width:4;filter:drop-shadow(0 3px 6px rgba(0,0,0,.45))}
+.unit-photo circle{fill:#0E3B2C;stroke:#fff;stroke-width:4;filter:drop-shadow(0 3px 6px rgba(0,0,0,.45))}
 .unit-photo text{fill:#fff;font:800 26px ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;text-anchor:middle}
 .unit-photo .lead-line{stroke:#fff;stroke-width:3;stroke-linecap:round;filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))}
 .unit-list{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -500,7 +508,7 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 /* ---------- kom i gang ---------- */
 .start{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;position:relative}
 .start li{position:relative;padding:28px 24px;border-radius:22px;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow)}
-.start .num{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--brand-strong);color:#fff;font-weight:750;font-size:16px;margin-bottom:18px;box-shadow:0 8px 20px -8px rgba(23,149,90,.7)}
+.start .num{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--brand-strong);color:#fff;font-weight:750;font-size:16px;margin-bottom:18px;box-shadow:0 8px 20px -8px rgba(60,203,127,.7)}
 .start h3{font-size:20px;font-weight:720;margin-bottom:8px}
 .start p{color:var(--muted);font-size:15.5px}
 .start-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
@@ -528,7 +536,7 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 .field label span{color:var(--muted);font-weight:500}
 .field input,.field textarea{font:inherit;font-size:16px;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px 14px;width:100%;transition:border-color .2s,box-shadow .2s}
 .field textarea{min-height:120px;resize:vertical}
-.field input:focus,.field textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px rgba(23,149,90,.2)}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px rgba(60,203,127,.2)}
 .form-note{font-size:14px;color:var(--muted)}
 .form-status{font-size:15px;padding:12px 14px;border-radius:12px;background:var(--clear-bg);color:var(--clear-text)}
 .contact-alt{display:grid;gap:14px;margin-top:32px}
@@ -540,8 +548,11 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 
 footer{margin:0 clamp(8px,1.4vw,20px) clamp(8px,1.4vw,20px);border-radius:clamp(22px,3vw,36px);padding-block:44px;background:var(--dk-bg);color:var(--dk-muted);font-size:14px}
 footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center}
-footer a{color:#a8edc8}
+footer a{color:#3CCB7F}
 footer .logo{color:var(--dk-text);font-size:17px}
+footer .logo-word{--logo-ink:#F4F6F1;--logo-dim:rgba(14,59,44,.3)}
+/* mørke flater og mørkt tema: signalgrønn knapp med mørk tekst, som lyset i logoen */
+.band,footer{--btn-bg:#3CCB7F;--btn-fg:#081F17;--btn-hover:#5fd896}
 
 /* mobil */
 @media (max-width:600px){
@@ -615,7 +626,7 @@ footer .logo{color:var(--dk-text);font-size:17px}
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
-    <symbol id="i-mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="#17955a"/><path d="M5 23c5-5 9-6.5 13-6.5s6 1 9 3V27H5z" fill="#a8edc8" opacity=".55"/><path d="M5 25.5c6-3.5 11-4.3 22-2.5V27H5z" fill="#e9f0ea"/><path d="M17.5 21V7" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><path d="M18 7.3l7 2.8-7 2.8z" fill="#fff"/></symbol>
+    <symbol id="i-logo" viewBox="2.2 4.8 429 78.2"><path fill="currentColor" d="M33.4 82.0Q23.20 82.0 16.25 78.8Q9.3 75.6 5.75 70.05Q2.2 64.5 2.2 57.3H20.20Q20.20 59.9 21.65 62.05Q23.1 64.2 26.0 65.4Q28.90 66.6 33.4 66.6Q37.30 66.6 40.05 65.6Q42.80 64.6 44.25 62.8Q45.7 61.0 45.7 58.5Q45.7 55.3 43.0 53.55Q40.30 51.8 33.9 51.3L29.20 50.9Q17.90 49.9 11.20 43.8Q4.5 37.69 4.5 27.59Q4.5 20.4 7.85 15.3Q11.20 10.20 17.3 7.5Q23.40 4.79 31.70 4.79Q40.7 4.79 46.95 7.79Q53.2 10.79 56.5 16.24Q59.80 21.69 59.80 28.9H41.80Q41.80 26.5 40.60 24.5Q39.40 22.5 37.15 21.34Q34.9 20.19 31.70 20.19Q28.70 20.19 26.65 21.14Q24.6 22.09 23.55 23.79Q22.5 25.5 22.5 27.59Q22.5 30.4 24.4 32.4Q26.3 34.4 31.0 34.8L35.7 35.19Q43.90 35.9 50.2 38.75Q56.5 41.59 60.1 46.5Q63.7 51.4 63.7 58.5Q63.7 65.6 60.05 70.9Q56.40 76.2 49.65 79.1Q42.90 82.0 33.4 82.0ZM101.9 80.0V63.8H98.9V46.5Q98.9 42.69 97.15 40.84Q95.4 39.0 91.4 39.0Q89.5 39.0 85.80 39.09Q82.10 39.19 78.0 39.39Q73.9 39.59 70.5 39.8V24.59Q72.9 24.4 76.2 24.2Q79.5 24.0 83.05 23.9Q86.60 23.79 89.60 23.79Q98.10 23.79 104.05 26.29Q110.0 28.79 113.15 33.8Q116.30 38.8 116.30 46.5V80.0ZM84.4 81.4Q78.60 81.4 74.10 79.30Q69.60 77.2 67.05 73.25Q64.5 69.3 64.5 63.8Q64.5 57.59 67.80 53.75Q71.10 49.9 76.9 48.09Q82.7 46.3 90.2 46.3H100.9V55.7H90.2Q86.5 55.7 84.5 57.55Q82.5 59.4 82.5 62.5Q82.5 65.5 84.5 67.35Q86.5 69.2 90.2 69.2Q92.60 69.2 94.45 68.35Q96.30 67.5 97.50 65.4Q98.70 63.3 98.9 59.59L103.10 63.59Q102.60 69.3 100.35 73.25Q98.10 77.2 94.15 79.30Q90.2 81.4 84.4 81.4ZM125.7 80.0V25.0Q125.7 15.29 131.3 10.54Q136.9 5.79 147.9 5.79H155.0V19.19H147.5Q145.10 19.19 143.8 20.49Q142.5 21.79 142.5 24.19V80.0ZM119.5 39.19V26.0H155.8V39.19ZM184.70 82.0Q177.70 82.0 172.3 79.6Q166.9 77.2 163.20 73.1Q159.50 69.0 157.55 63.9Q155.60 58.8 155.60 53.4V51.4Q155.60 45.8 157.55 40.65Q159.50 35.5 163.15 31.5Q166.8 27.5 172.10 25.15Q177.40 22.79 184.10 22.79Q193.00 22.79 199.20 26.79Q205.40 30.79 208.70 37.34Q212.00 43.9 212.00 51.59V57.4H163.20V47.6H201.50L195.20 52.0Q195.20 47.3 193.95 44.05Q192.70 40.8 190.25 39.09Q187.8 37.4 184.10 37.4Q180.50 37.4 177.85 39.05Q175.20 40.69 173.8 44.05Q172.40 47.4 172.40 52.5Q172.40 57.09 173.70 60.44Q175.00 63.8 177.70 65.6Q180.40 67.4 184.70 67.4Q188.50 67.4 190.95 66.1Q193.40 64.8 194.40 62.59H211.00Q209.8 68.2 206.25 72.6Q202.70 77.0 197.25 79.5Q191.8 82.0 184.70 82.0ZM253.70 82.0Q243.40 82.0 236.00 78.55Q228.60 75.1 223.90 69.5Q219.20 63.9 217.00 57.3Q214.80 50.7 214.80 44.4V42.19Q214.80 35.4 217.10 28.74Q219.40 22.09 224.05 16.69Q228.70 11.29 235.70 8.04Q242.70 4.79 252.10 4.79Q262.20 4.79 269.95 8.5Q277.70 12.20 282.40 18.75Q287.1 25.29 287.90 33.9H269.3Q268.70 30.59 266.40 27.94Q264.1 25.29 260.45 23.74Q256.8 22.19 252.10 22.19Q247.60 22.19 244.15 23.74Q240.70 25.29 238.35 28.15Q236.00 31.0 234.8 34.9Q233.60 38.8 233.60 43.4Q233.60 48.0 234.90 51.95Q236.20 55.9 238.70 58.84Q241.20 61.8 245.00 63.4Q248.80 65.0 253.70 65.0Q259.90 65.0 264.40 62.4Q268.90 59.8 270.70 55.5L269.3 66.5V50.59H286.3V65.6Q281.70 73.5 273.25 77.75Q264.8 82.0 253.70 82.0ZM251.70 54.2V41.19H292.30V54.2ZM324.40 82.0Q317.10 82.0 311.40 79.8Q305.70 77.6 301.75 73.69Q297.80 69.8 295.75 64.69Q293.70 59.59 293.70 53.8V51.4Q293.70 45.4 295.85 40.2Q298.00 35.0 302.00 31.09Q306.00 27.19 311.70 24.99Q317.40 22.79 324.40 22.79Q331.50 22.79 337.15 24.99Q342.80 27.19 346.80 31.09Q350.80 35.0 352.95 40.2Q355.10 45.4 355.10 51.4V53.8Q355.10 59.59 353.05 64.69Q351.00 69.8 347.05 73.69Q343.10 77.6 337.40 79.8Q331.70 82.0 324.40 82.0ZM324.40 66.8Q328.60 66.8 331.35 65.0Q334.10 63.2 335.50 59.95Q336.90 56.7 336.90 52.59Q336.90 48.3 335.45 45.05Q334.00 41.8 331.20 39.9Q328.40 38.0 324.40 38.0Q320.40 38.0 317.60 39.9Q314.80 41.8 313.35 45.05Q311.90 48.3 311.90 52.59Q311.90 56.7 313.30 59.95Q314.70 63.2 317.50 65.0Q320.30 66.8 324.40 66.8ZM401.1 80.0V25.0Q401.1 15.29 406.70 10.54Q412.3 5.79 423.3 5.79H430.40V19.19H422.90Q420.5 19.19 419.20 20.49Q417.90 21.79 417.90 24.19V80.0ZM394.90 39.19V26.0H431.2V39.19Z"/><rect x="361.4" y="9" width="29" height="74" rx="14.5" fill="currentColor"/><circle cx="375.9" cy="23.8" r="8.7" style="fill:var(--logo-dim)"/><circle cx="375.9" cy="46" r="8.7" style="fill:var(--logo-dim)"/><circle cx="375.9" cy="68.2" r="8.7" fill="#3CCB7F"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-hand" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1.4" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1.4" fill="currentColor"/></symbol>
     <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" fill="currentColor"/></symbol>
@@ -652,9 +663,8 @@ footer .logo{color:var(--dk-text);font-size:17px}
 <header class="site-head">
   <div class="wrap">
     <div class="head-row">
-      <a class="logo" href="#top" aria-label="Fairview – til toppen">
-        <svg class="logo-mark" aria-hidden="true"><use href="#i-mark"/></svg>
-        Fairview
+      <a class="logo" href="#top" aria-label="SafeGolf – til toppen">
+        <svg class="logo-word" viewBox="2.2 4.8 429 78.2" aria-hidden="true"><use href="#i-logo"/></svg>
       </a>
       <nav class="nav" aria-label="Hovedmeny">
         <a href="#slik-virker-det">Slik virker det</a>
@@ -699,7 +709,7 @@ footer .logo{color:var(--dk-text);font-size:17px}
 
       <div class="stage" id="stage">
         <div class="p3d" id="p3d">
-          <img class="p-face" id="hero-shot" src="{{IMG:hero}}" width="600" height="1254" alt="Fairview på telefonen, hull 4: kamerabilde av tre golfere med traller på fairway, 170 meter til den bakerste i gruppa foran, og beskjeden «Vent med å slå». Under vises et oversiktsbilde av hullet med spilleren på bakerste tee og gruppa innenfor 250 meter.">
+          <img class="p-face" id="hero-shot" src="{{IMG:hero}}" width="600" height="1254" alt="SafeGolf på telefonen, hull 4: kamerabilde av tre golfere med traller på fairway, 170 meter til den bakerste i gruppa foran, og beskjeden «Vent med å slå». Under vises et oversiktsbilde av hullet med spilleren på bakerste tee og gruppa innenfor 250 meter.">
           <div class="chip3d c2" aria-hidden="true"><i class="rec"></i>Live · Tee-kamera</div>
           <div class="chip3d c1" aria-hidden="true"><div><span class="pill pill-wait"><svg><use href="#i-hand"/></svg>Vent med å slå</span><small style="margin-top:6px">170 m til gruppa foran</small></div></div>
           <div class="chip3d c4" aria-hidden="true"><svg><use href="#i-target"/></svg><div>250 m<small>regnet utslag</small></div></div>
@@ -799,7 +809,7 @@ footer .logo{color:var(--dk-text);font-size:17px}
           <path d="M14 42 C 44 34, 80 48, 106 38" stroke="#3e6b2b" stroke-width="18" fill="none" stroke-linecap="round"/>
           <rect x="8" y="36" width="12" height="12" rx="3" fill="#86bb56"/>
           <circle cx="106" cy="38" r="8" fill="#6f9d4e"/>
-          <path d="M36 64 L 6 30 A 40 40 0 0 1 26 22 Z" fill="#a8edc8" opacity=".3"/><circle cx="36" cy="64" r="5" fill="#17955a" stroke="#e9f0ea" stroke-width="2"/><circle cx="12" cy="42" r="3" fill="#d98a1f"/><circle cx="16" cy="45" r="3" fill="#d98a1f"/>
+          <path d="M36 64 L 6 30 A 40 40 0 0 1 26 22 Z" fill="#3CCB7F" opacity=".3"/><circle cx="36" cy="64" r="5" fill="#3CCB7F" stroke="#F4F6F1" stroke-width="2"/><circle cx="12" cy="42" r="3" fill="#d98a1f"/><circle cx="16" cy="45" r="3" fill="#d98a1f"/>
         </svg>
         <div><h3>Tee-kamera</h3><p>Ser om det er ledig på tee. For utslagssteder som ligger høyt eller skjult, der du må krysse uten å se hvem som står der.</p></div>
       </div>
@@ -809,7 +819,7 @@ footer .logo{color:var(--dk-text);font-size:17px}
           <path d="M14 42 C 44 34, 80 48, 106 38" stroke="#3e6b2b" stroke-width="18" fill="none" stroke-linecap="round"/>
           <rect x="8" y="36" width="12" height="12" rx="3" fill="#86bb56"/>
           <circle cx="106" cy="38" r="8" fill="#6f9d4e"/>
-          <path d="M70 66 L 40 26 A 44 44 0 0 1 84 24 Z" fill="#a8edc8" opacity=".3"/><circle cx="70" cy="66" r="5" fill="#17955a" stroke="#e9f0ea" stroke-width="2"/><circle cx="58" cy="41" r="3" fill="#d98a1f"/><circle cx="63" cy="44" r="3" fill="#d98a1f"/>
+          <path d="M70 66 L 40 26 A 44 44 0 0 1 84 24 Z" fill="#3CCB7F" opacity=".3"/><circle cx="70" cy="66" r="5" fill="#3CCB7F" stroke="#F4F6F1" stroke-width="2"/><circle cx="58" cy="41" r="3" fill="#d98a1f"/><circle cx="63" cy="44" r="3" fill="#d98a1f"/>
         </svg>
         <div><h3>Fairway-kamera</h3><p>Ser om det er folk i fairway. For hull der en bakketopp eller et dogleg skjuler landingsområdet fra tee.</p></div>
       </div>
@@ -819,7 +829,7 @@ footer .logo{color:var(--dk-text);font-size:17px}
           <path d="M14 42 C 44 34, 80 48, 106 38" stroke="#3e6b2b" stroke-width="18" fill="none" stroke-linecap="round"/>
           <rect x="8" y="36" width="12" height="12" rx="3" fill="#86bb56"/>
           <circle cx="106" cy="38" r="8" fill="#6f9d4e"/>
-          <path d="M92 68 L 94 22 A 26 26 0 0 1 118 36 Z" fill="#a8edc8" opacity=".3"/><circle cx="92" cy="68" r="5" fill="#17955a" stroke="#e9f0ea" stroke-width="2"/><circle cx="103" cy="36" r="3" fill="#d98a1f"/><circle cx="109" cy="40" r="3" fill="#d98a1f"/>
+          <path d="M92 68 L 94 22 A 26 26 0 0 1 118 36 Z" fill="#3CCB7F" opacity=".3"/><circle cx="92" cy="68" r="5" fill="#3CCB7F" stroke="#F4F6F1" stroke-width="2"/><circle cx="103" cy="36" r="3" fill="#d98a1f"/><circle cx="109" cy="40" r="3" fill="#d98a1f"/>
         </svg>
         <div><h3>Green-kamera</h3><p>Ser om det er ledig på green. For hull der greenen ligger lavt eller skjult, og innspillet er blindt.</p></div>
       </div>
@@ -837,7 +847,7 @@ footer .logo{color:var(--dk-text);font-size:17px}
       <div class="prose reveal">
         <p>På et blindt hull er det ingen som roper «fore» i tide, fordi ingen ser at det trengs. Den som blir truffet, har ryggen til og ingen grunn til å dukke.</p>
         <p><strong>Klubben har ansvaret for sikkerheten på banen.</strong> Et skilt på tee er en påminnelse, ikke et tiltak. Det sier at hullet er blindt – det sier ingenting om hvor gruppa foran står akkurat nå.</p>
-        <p>Fairview er et konkret tiltak, plassert på de hullene der risikoen faktisk er. Spilleren får se landingsområdet og får et tydelig svar før hen slår.</p>
+        <p>SafeGolf er et konkret tiltak, plassert på de hullene der risikoen faktisk er. Spilleren får se landingsområdet og får et tydelig svar før hen slår.</p>
       </div>
       <ul class="points reveal">
         <li class="point" data-tilt>
@@ -893,7 +903,7 @@ footer .logo{color:var(--dk-text);font-size:17px}
         </ol>
       </div>
       <div class="flow flow-with" data-tilt>
-        <h3>Med Fairview</h3>
+        <h3>Med SafeGolf</h3>
         <ol>
           <li>Gruppa kommer til tee</li>
           <li class="good">Skanner QR-koden</li>
@@ -962,15 +972,15 @@ footer .logo{color:var(--dk-text);font-size:17px}
     </div>
     <div class="phones" id="phones">
       <figure>
-        <img class="shot" src="{{IMG:klart}}" width="600" height="1254" alt="Skjermbilde fra Fairview-demoen, hull 4: kamerabilde av fairway, 260 meter til den bakerste i gruppa foran, og beskjeden «Klart å slå». Under vises kartet med gruppa forbi 250-metersringen." decoding="async">
+        <img class="shot" src="{{IMG:klart}}" width="600" height="1254" alt="Skjermbilde fra SafeGolf-demoen, hull 4: kamerabilde av fairway, 260 meter til den bakerste i gruppa foran, og beskjeden «Klart å slå». Under vises kartet med gruppa forbi 250-metersringen." decoding="async">
         <figcaption><b class="pill pill-clear"><svg aria-hidden="true"><use href="#i-check"/></svg>Klart å slå</b><span>Hull 4: gruppa foran er 260&nbsp;m unna, forbi 250-metersringen. Avstanden er rundet ned med fem meters margin.</span></figcaption>
       </figure>
       <figure>
-        <img class="shot" id="shot-vent" src="{{IMG:vent}}" width="600" height="1254" alt="Skjermbilde fra Fairview-demoen, hull 9: kamerabilde av fairway, 170 meter til den bakerste i gruppa foran, og beskjeden «Vent med å slå». Kartet viser gruppa innenfor 250 meter." decoding="async">
+        <img class="shot" id="shot-vent" src="{{IMG:vent}}" width="600" height="1254" alt="Skjermbilde fra SafeGolf-demoen, hull 9: kamerabilde av fairway, 170 meter til den bakerste i gruppa foran, og beskjeden «Vent med å slå». Kartet viser gruppa innenfor 250 meter." decoding="async">
         <figcaption><b class="pill pill-wait"><svg aria-hidden="true"><use href="#i-hand"/></svg>Vent med å slå</b><span>Hull 9: den bakerste i gruppa står 170&nbsp;m unna, innenfor rekkevidde. Appen viser hvor.</span></figcaption>
       </figure>
       <figure>
-        <img class="shot" src="{{IMG:ukjent}}" width="600" height="1254" alt="Skjermbilde fra Fairview-demoen, hull 2 uten kamera: «Ingen kameravisning her» og beskjeden «Se selv før du slår». Under vises banekartet uten posisjoner." decoding="async">
+        <img class="shot" src="{{IMG:ukjent}}" width="600" height="1254" alt="Skjermbilde fra SafeGolf-demoen, hull 2 uten kamera: «Ingen kameravisning her» og beskjeden «Se selv før du slår». Under vises banekartet uten posisjoner." decoding="async">
         <figcaption><b class="pill" style="background:var(--border);color:var(--text)"><svg aria-hidden="true"><use href="#i-eye"/></svg>Se selv før du slår</b><span>Hull 2 har ikke kamera. Appen melder aldri «fritt» uten bilde – den ber spilleren se selv.</span></figcaption>
       </figure>
     </div>
@@ -1026,7 +1036,7 @@ footer .logo{color:var(--dk-text);font-size:17px}
     <div class="reveal">
       <p class="eyebrow">Personvern</p>
       <h2 class="h2" id="priv-title">Kameraet ser at noen står der. Ikke hvem.</h2>
-      <p class="lead">Fairview trenger bare å vite hvor folk står. Alt annet er bygget bort.</p>
+      <p class="lead">SafeGolf trenger bare å vite hvor folk står. Alt annet er bygget bort.</p>
     </div>
     <ul class="priv-list reveal">
       <li data-tilt>
@@ -1101,7 +1111,7 @@ footer .logo{color:var(--dk-text);font-size:17px}
       </details>
       <details>
         <summary>Kan spilleren stole blindt på appen?</summary>
-        <div class="ans"><p>Nei, og det skal ingen gjøre. Appen regner med utslag på inntil 250&nbsp;meter. Den som slår lenger, må fortsatt se selv. Fairview er et hjelpemiddel på tee, ikke en erstatning for skjønn.</p></div>
+        <div class="ans"><p>Nei, og det skal ingen gjøre. Appen regner med utslag på inntil 250&nbsp;meter. Den som slår lenger, må fortsatt se selv. SafeGolf er et hjelpemiddel på tee, ikke en erstatning for skjønn.</p></div>
       </details>
     </div>
   </div>
@@ -1146,8 +1156,8 @@ footer .logo{color:var(--dk-text);font-size:17px}
 
 <footer>
   <div class="wrap">
-    <a class="logo" href="#top"><svg class="logo-mark" aria-hidden="true"><use href="#i-mark"/></svg>Fairview</a>
-    <p>Fairview leveres av Syntriq AS. <a href="https://fairview-pied.vercel.app/demo" target="_blank" rel="noopener">Se demoen</a></p>
+    <a class="logo" href="#top" aria-label="SafeGolf – til toppen"><svg class="logo-word" viewBox="2.2 4.8 429 78.2" aria-hidden="true"><use href="#i-logo"/></svg></a>
+    <p>SafeGolf leveres av Syntriq AS. <a href="https://fairview-pied.vercel.app/demo" target="_blank" rel="noopener">Se demoen</a></p>
   </div>
 </footer>
 
@@ -1162,7 +1172,7 @@ footer .logo{color:var(--dk-text);font-size:17px}
   var clamp = function(v, a, b){ return Math.max(a, Math.min(b, v)); };
 
   /* ---------- tema ---------- */
-  var KEY = 'fairview-tema';
+  var KEY = 'safegolf-tema';
   try { var saved = localStorage.getItem(KEY); if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved); } catch (e) {}
   function isDark(){
     var t = root.getAttribute('data-theme');
@@ -1958,8 +1968,8 @@ footer .logo{color:var(--dk-text);font-size:17px}
     var me = person('#2f6fb5', '#2b2f33', '#f4f4f0', true); me.position.copy(youP); me.rotation.y = Math.PI; scene.add(me);
     c.youP = youP;
     var group = [], gear = [], boxes = [];
-    var boxMat = new T.MeshBasicMaterial({ color: lin('#b8ffd6'), transparent: true, opacity: 0, depthWrite: false, toneMapped: false, fog: false });
-    var boxFill = new T.MeshBasicMaterial({ color: lin('#a8edc8'), transparent: true, opacity: 0, depthWrite: false, side: T.DoubleSide, toneMapped: false, fog: false });
+    var boxMat = new T.MeshBasicMaterial({ color: lin('#8fe9b8'), transparent: true, opacity: 0, depthWrite: false, toneMapped: false, fog: false });
+    var boxFill = new T.MeshBasicMaterial({ color: lin('#3CCB7F'), transparent: true, opacity: 0, depthWrite: false, side: T.DoubleSide, toneMapped: false, fog: false });
     var bw = 1.9, bh = 2.8, bt = 0.09, barV = new T.BoxGeometry(bt, bh, bt), barX = new T.BoxGeometry(bw + bt, bt, bt), barZ = new T.BoxGeometry(bt, bt, bw + bt);
     var fillGeo = new T.BoxGeometry(bw, bh, bw), ringGeo = new T.RingGeometry(1.25, 1.5, 40);
     var SHIRTS = [['#d98a1f', '#e7e3d8', null], ['#c9d6e3', '#3b3f45', '#1f2a3a'], ['#8b2330', '#c9bfa8', '#f0f0ec']];
@@ -2000,10 +2010,10 @@ footer .logo{color:var(--dk-text);font-size:17px}
     unit.add(mesh(new T.CylinderGeometry(0.015, 0.015, 0.7, 6), std('#2b3530'), 0.24, 2.05, 0.22));
     unit.add(mesh(new T.BoxGeometry(0.1, 0.1, 0.35), metal, 0, 3.9, 0.2));
     var head = new T.Group(); head.position.set(0, 3.9, 0.4); unit.add(head);
-    var houseMat = std('#eef2ee', { roughness: .4, emissive: lin('#a8edc8'), emissiveIntensity: 0 });
+    var houseMat = std('#eef2ee', { roughness: .4, emissive: lin('#3CCB7F'), emissiveIntensity: 0 });
     head.add(mesh(new T.BoxGeometry(0.34, 0.3, 0.62), houseMat, 0, 0, 0.15));
     head.add(mesh(new T.BoxGeometry(0.4, 0.04, 0.74), houseMat, 0, 0.17, 0.2));
-    var lens = mesh(new T.CylinderGeometry(0.12, 0.1, 0.07, 18), std('#0d1c13', { roughness: .15, metalness: .6 }), 0, 0, 0.48);
+    var lens = mesh(new T.CylinderGeometry(0.12, 0.1, 0.07, 18), std('#0E3B2C', { roughness: .15, metalness: .6 }), 0, 0, 0.48);
     lens.rotation.x = Math.PI / 2; head.add(lens);
     var US = cfg.unitScale || 2.6; unit.scale.setScalar(US);
     unit.lookAt(U.aim.x, uy, U.aim.z);
@@ -2017,18 +2027,18 @@ footer .logo{color:var(--dk-text);font-size:17px}
     var cn = FP.map(function(q){ return new V(q.x, hAt(q.x, q.z) + 0.6, q.z); });
     var cvv = []; for (var ci = 0; ci < cn.length; ci++){ var c1 = cn[ci], c2 = cn[(ci + 1) % cn.length]; cvv.push(lensW.x, lensW.y, lensW.z, c1.x, c1.y, c1.z, c2.x, c2.y, c2.z); }
     var coneGeo = new T.BufferGeometry(); coneGeo.setAttribute('position', new T.Float32BufferAttribute(cvv, 3));
-    var coneMat = new T.MeshBasicMaterial({ color: lin('#a8edc8'), transparent: true, opacity: .12, side: T.DoubleSide, depthWrite: false, toneMapped: false });
+    var coneMat = new T.MeshBasicMaterial({ color: lin('#3CCB7F'), transparent: true, opacity: .12, side: T.DoubleSide, depthWrite: false, toneMapped: false });
     var coneMesh = new T.Mesh(coneGeo, coneMat); scene.add(coneMesh);
     var ev = []; cn.forEach(function(q){ ev.push(lensW.x, lensW.y, lensW.z, q.x, q.y, q.z); });
     for (var ei = 0; ei < cn.length; ei++){ var e1 = cn[ei], e2 = cn[(ei + 1) % cn.length]; ev.push(e1.x, e1.y, e1.z, e2.x, e2.y, e2.z); }
     var edgeGeo = new T.BufferGeometry(); edgeGeo.setAttribute('position', new T.Float32BufferAttribute(ev, 3));
-    var edgeMat = new T.LineBasicMaterial({ color: lin('#a8edc8'), transparent: true, opacity: .45, toneMapped: false });
+    var edgeMat = new T.LineBasicMaterial({ color: lin('#3CCB7F'), transparent: true, opacity: .45, toneMapped: false });
     var edgeMesh = new T.LineSegments(edgeGeo, edgeMat); scene.add(edgeMesh);
-    var ringMat = new T.MeshBasicMaterial({ color: lin('#a8edc8'), transparent: true, opacity: 0, side: T.DoubleSide, depthWrite: false, toneMapped: false });
+    var ringMat = new T.MeshBasicMaterial({ color: lin('#3CCB7F'), transparent: true, opacity: 0, side: T.DoubleSide, depthWrite: false, toneMapped: false });
     var gring = new T.Mesh(new T.RingGeometry(2 * US, 3 * US, 48), ringMat); gring.rotation.x = -Math.PI / 2; gring.position.set(UX, uy + 0.4, UZ); scene.add(gring);
     var waves = [];
     for (var wi = 0; wi < 3; wi++){
-      var wv = new T.Mesh(new T.TorusGeometry(2.4, 0.22, 8, 48), new T.MeshBasicMaterial({ color: lin('#a8edc8'), transparent: true, opacity: 0, depthWrite: false, toneMapped: false }));
+      var wv = new T.Mesh(new T.TorusGeometry(2.4, 0.22, 8, 48), new T.MeshBasicMaterial({ color: lin('#3CCB7F'), transparent: true, opacity: 0, depthWrite: false, toneMapped: false }));
       wv.rotation.x = Math.PI / 2; scene.add(wv); waves.push(wv);
     }
 
@@ -2075,14 +2085,20 @@ footer .logo{color:var(--dk-text);font-size:17px}
         g.fillStyle = fg; g.fillText(text, x + pad + dw, y + h / 2 + size * .36); return w;
       }
       rr(0, 0, W, H, 92); g.fillStyle = '#1b221d'; g.fill();
-      rr(14, 14, W - 28, H - 28, 80); g.fillStyle = '#e9f0ea'; g.fill();
+      rr(14, 14, W - 28, H - 28, 80); g.fillStyle = '#F4F6F1'; g.fill();
       g.save(); rr(14, 14, W - 28, H - 28, 80); g.clip();
       rr(W / 2 - 80, 32, 160, 46, 23); g.fillStyle = '#050705'; g.fill();
-      g.fillStyle = '#0d1c13'; g.font = '600 28px ' + F; g.fillText('9:41', 66, 66);
+      g.fillStyle = '#0E3B2C'; g.font = '600 28px ' + F; g.fillText('9:41', 66, 66);
       // topplinje
-      rr(44, 104, 60, 60, 16); g.fillStyle = '#17955a'; g.fill();
-      g.fillStyle = '#fff'; g.fillRect(70, 118, 5, 32); g.beginPath(); g.moveTo(75, 120); g.lineTo(92, 127); g.lineTo(75, 134); g.fill();
-      g.fillStyle = '#0d1c13'; g.font = '750 34px ' + F; g.fillText('Fairview', 118, 146);
+      // SafeGolf-logoen, tegnet fra samme vektor som i headeren
+      var lp = document.querySelector('#i-logo path');
+      if (lp && window.Path2D){
+        g.save(); g.translate(44, 112); g.scale(.6, .6); g.translate(-2.2, -4.8);
+        g.fillStyle = '#0E3B2C'; g.fill(new Path2D(lp.getAttribute('d'))); rr(361.4, 9, 29, 74, 14.5); g.fill();
+        [[23.8, 'rgba(244,246,241,.22)'], [46, 'rgba(244,246,241,.22)'], [68.2, '#3CCB7F']].forEach(function(l){ g.fillStyle = l[1]; g.beginPath(); g.arc(375.9, l[0], 8.7, 0, 7); g.fill(); });
+        g.restore();
+      } else { g.fillStyle = '#0E3B2C'; g.font = '800 34px ' + F; g.fillText('SafeGolf', 44, 146); }
+      g.fillStyle = '#0E3B2C';
       g.font = '800 44px ' + F; g.fillText('Hull 4', 44, 222);
       g.font = '500 24px ' + F; g.fillStyle = '#5c7565'; g.fillText('Par ' + cfg.par + ' · ' + (Math.round(TOTAL / 2) * 2) + ' m', 196, 220);
       // kamerabilde
@@ -2093,7 +2109,7 @@ footer .logo{color:var(--dk-text);font-size:17px}
       var gr = g.createLinearGradient(0, cy + ch - 170, 0, cy + ch); gr.addColorStop(0, 'rgba(8,14,10,0)'); gr.addColorStop(1, 'rgba(8,14,10,.85)');
       g.fillStyle = gr; g.fillRect(14, cy + ch - 170, W - 28, 170);
       g.restore();
-      pill(34, cy + 18, 'LIVE · KAMERAPUNKT', 'rgba(13,28,19,.72)', '#fff', 17, '#e5484d');
+      pill(34, cy + 18, 'LIVE · KAMERAPUNKT', 'rgba(14,59,44,.72)', '#fff', 17, '#e5484d');
       g.fillStyle = 'rgba(233,240,234,.85)'; g.font = '700 18px ' + F; g.fillText('TIL DEN BAKERSTE I GRUPPA', 40, cy + ch - 98);
       var dm = Math.floor(dval / 5) * 5;
       g.fillStyle = '#fff'; g.font = '800 76px ' + F; g.fillText(String(dm), 38, cy + ch - 26);
@@ -2101,7 +2117,7 @@ footer .logo{color:var(--dk-text);font-size:17px}
       g.font = '700 21px ' + F; var pw = g.measureText('Vent med å slå').width + 60;
       pill(W - 34 - pw, cy + ch - 78, 'Vent med å slå', '#f7e9d6', '#7a4a0a', 21, '#d98a1f');
       // melding
-      g.fillStyle = '#0d1c13'; g.font = '600 22px ' + F;
+      g.fillStyle = '#0E3B2C'; g.font = '600 22px ' + F;
       g.fillText(group.length + ' spillere foran deg, innenfor 250 m.', 40, cy + ch + 46);
       g.fillStyle = '#5c7565'; g.font = '500 20px ' + F; g.fillText('Kameraet står i skogkanten og ser mot toppen.', 40, cy + ch + 78);
       // kart
@@ -2115,16 +2131,16 @@ footer .logo{color:var(--dk-text);font-size:17px}
       g.setLineDash([6, 7]); g.lineWidth = 2; g.strokeStyle = 'rgba(255,255,255,.75)';
       [150, 250].forEach(function(rm){ g.beginPath(); g.arc(tp[0], tp[1], rm * ppm, 0, Math.PI * 2); g.stroke(); });
       g.setLineDash([]);
-      [150, 250].forEach(function(rm){ pill(tp[0] - rm * ppm * .72 - 30, tp[1] - rm * ppm * .7 - 14, rm + ' m', 'rgba(255,255,255,.9)', '#0d1c13', 14); });
+      [150, 250].forEach(function(rm){ pill(tp[0] - rm * ppm * .72 - 30, tp[1] - rm * ppm * .7 - 14, rm + ' m', 'rgba(255,255,255,.9)', '#0E3B2C', 14); });
       var rp = P(c.groupRear.x, c.groupRear.z);
       g.setLineDash([8, 6]); g.lineWidth = 3; g.strokeStyle = '#fff'; g.beginPath(); g.moveTo(tp[0], tp[1]); g.lineTo(rp[0], rp[1]); g.stroke(); g.setLineDash([]);
-      var mid = [(tp[0] + rp[0]) / 2, (tp[1] + rp[1]) / 2]; pill(mid[0] + 8, mid[1] - 16, dm + ' m', '#0d1c13', '#fff', 16);
+      var mid = [(tp[0] + rp[0]) / 2, (tp[1] + rp[1]) / 2]; pill(mid[0] + 8, mid[1] - 16, dm + ' m', '#0E3B2C', '#fff', 16);
       group.forEach(function(p){ var q = P(p.position.x, p.position.z); g.fillStyle = '#fff'; g.beginPath(); g.arc(q[0], q[1], 11, 0, 7); g.fill(); g.fillStyle = '#d98a1f'; g.beginPath(); g.arc(q[0], q[1], 8, 0, 7); g.fill(); });
-      var up2 = P(UX, UZ); rr(up2[0] - 9, up2[1] - 9, 18, 18, 5); g.fillStyle = '#12784a'; g.fill(); g.strokeStyle = '#fff'; g.lineWidth = 2.5; g.stroke();
+      var up2 = P(UX, UZ); rr(up2[0] - 9, up2[1] - 9, 18, 18, 5); g.fillStyle = '#0E3B2C'; g.fill(); g.strokeStyle = '#fff'; g.lineWidth = 2.5; g.stroke();
       g.fillStyle = 'rgba(61,139,217,.3)'; g.beginPath(); g.arc(tp[0], tp[1], 20, 0, 7); g.fill();
       g.fillStyle = '#fff'; g.beginPath(); g.arc(tp[0], tp[1], 12, 0, 7); g.fill(); g.fillStyle = '#3d8bd9'; g.beginPath(); g.arc(tp[0], tp[1], 9, 0, 7); g.fill();
       g.restore();
-      rr(W / 2 - 70, H - 42, 140, 8, 4); g.fillStyle = 'rgba(13,28,19,.8)'; g.fill();
+      rr(W / 2 - 70, H - 42, 140, 8, 4); g.fillStyle = 'rgba(14,59,44,.8)'; g.fill();
       g.restore();
       return cv;
     }
@@ -2439,7 +2455,7 @@ footer .logo{color:var(--dk-text);font-size:17px}
     var body = 'Navn: ' + f.navn.value + '\nKlubb: ' + f.klubb.value + '\nE-post: ' + f.epost.value +
       (f.telefon.value ? '\nTelefon: ' + f.telefon.value : '') +
       (f.melding.value ? '\n\n' + f.melding.value : '');
-    var url = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Befaring Fairview – ' + f.klubb.value) + '&body=' + encodeURIComponent(body);
+    var url = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Befaring SafeGolf – ' + f.klubb.value) + '&body=' + encodeURIComponent(body);
     status.hidden = false;
     status.textContent = 'E-postprogrammet ditt skal nå åpne seg med meldingen ferdig utfylt. Skjer ingenting, send meldingen til ' + EMAIL + '.';
     window.location.href = url;
