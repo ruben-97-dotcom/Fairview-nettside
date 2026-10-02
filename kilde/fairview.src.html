@@ -159,15 +159,27 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 .stage{position:relative;display:grid;place-items:center;padding:30px 0 50px}
 .p3d{position:relative;width:300px;aspect-ratio:600/1254}
 .p-face{position:absolute;inset:0;width:100%;height:100%;display:block;border-radius:15.5%/7.4%;box-shadow:0 44px 70px -30px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.05)}
-.chip3d{position:absolute;display:flex;align-items:center;gap:9px;padding:11px 14px;border-radius:16px;background:rgba(20,30,24,.9);border:1px solid rgba(168,237,200,.18);color:#e9f0ea;font-size:13.5px;font-weight:620;box-shadow:0 24px 40px -14px rgba(0,0,0,.7);white-space:nowrap;pointer-events:none;animation:float 7s ease-in-out infinite}
-.chip3d svg{width:18px;height:18px;color:#a8edc8;flex:none}
-.chip3d small{display:block;font-size:12px;color:#9db0a3;font-weight:500}
-.chip3d .rec{width:8px;height:8px;border-radius:50%;background:#e5484d;box-shadow:0 0 0 4px rgba(229,72,77,.2);animation:pulse 2s ease-in-out infinite}
-.c1{left:-30%;top:60%}
-.c2{right:-22%;top:4%;animation-delay:-2s}
-.c3{left:-18%;bottom:6%;animation-delay:-4s}
-.c4{right:-22%;top:56%;animation-delay:-5.5s}
-@keyframes float{50%{translate:0 -6px}}
+/* forklaringer rundt telefonen: nummer på skjermen, tekst ved siden av med en tynn strek inn */
+.ann-dot{position:absolute;left:calc(var(--x) * 100%);top:calc(var(--y) * 100%);translate:-50% -50%;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#a8edc8;color:#0d1c13;font-size:12.5px;font-weight:800;box-shadow:0 0 0 4px rgba(168,237,200,.28),0 6px 14px -4px rgba(0,0,0,.6);z-index:2}
+.anns{list-style:none;margin:0;padding:0}
+.anns li{display:flex;gap:12px;align-items:flex-start}
+.anns b{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:rgba(168,237,200,.14);color:#a8edc8;font-size:12.5px;font-weight:800}
+.anns strong{display:block;color:var(--dk-text);font-size:15px;font-weight:700;line-height:1.3}
+.anns span{display:block;color:var(--dk-muted);font-size:14px;line-height:1.45;margin-top:2px}
+.stage-cap{margin:18px 0 0;font-size:12.5px;color:var(--dk-muted);opacity:.8}
+@media (min-width:1181px){
+  .stage{display:flex;flex-direction:column;align-items:flex-start;padding:30px 0 40px;--pw:300px;--ph:calc(var(--pw) * 1254 / 600)}
+  .p3d{width:var(--pw);margin-left:10px}
+  .anns li{position:absolute;left:calc(10px + var(--pw) + 30px);top:calc(30px + var(--y) * var(--ph));translate:0 -12px;width:200px}
+  .anns li::before{content:"";position:absolute;right:calc(100% + 6px);top:12px;height:1px;width:calc((1 - var(--x)) * var(--pw) + 24px);background:linear-gradient(90deg,rgba(168,237,200,.85),rgba(168,237,200,.35))}
+  .anns b{display:none}
+  .stage-cap{margin-left:10px;width:var(--pw);text-align:center}
+}
+@media (max-width:1180px){
+  .stage{grid-template-columns:auto;justify-items:center}
+  .anns{display:grid;gap:14px;margin-top:28px;max-width:420px;width:100%}
+  .stage-cap{text-align:center}
+}
 .pill{display:inline-flex;align-items:center;gap:6px;font-weight:720;font-size:13px;padding:6px 11px;border-radius:999px;white-space:nowrap}
 .pill svg{width:14px;height:14px;flex:none;color:currentColor}
 .pill-clear{background:#e6f3eb;color:#146b43}
@@ -190,8 +202,6 @@ section{padding-block:112px;scroll-margin-top:84px;position:relative}
 }
 @media (max-width:560px){
   .p3d{width:230px}
-  .chip3d{font-size:12px;padding:9px 11px;border-radius:13px}
-  .c1{left:-12%}.c2{right:-8%}.c3{left:-6%}.c4{display:none}
   .facts div{padding:18px}
 }
 
@@ -555,12 +565,8 @@ footer .logo{color:var(--dk-text);font-size:17px}
   .hero-cta .btn{padding:0 12px}
   .hero-facts{margin-top:24px;gap:8px 16px;font-size:14px}
   .stage{padding:26px 0 16px}
-  .p3d{width:210px}
-  .chip3d{font-size:11.5px;padding:7px 10px;gap:7px;border-radius:12px}
-  .chip3d small{font-size:10.5px}
-  .chip3d svg{width:15px;height:15px}
-  .chip3d .pill{font-size:11.5px;padding:4px 8px}
-  .c1{left:-24%;top:58%}.c2{right:-20%;top:2%}.c3{left:-20%;bottom:3%}.c4{display:flex;right:-22%;top:34%}
+  .p3d{width:250px}
+  .ann-dot{width:20px;height:20px;font-size:11px}
   .facts{margin-top:28px;border-radius:16px}
   .facts div{padding:16px 14px}
   .facts dt{font-size:19px}
@@ -607,7 +613,6 @@ footer .logo{color:var(--dk-text);font-size:17px}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .reveal,.reveal.pending{transition:none;transform:none;opacity:1}
-  .chip3d,.chip3d .rec{animation:none!important}
   [data-tilt]{transform:none!important}
 }
 </style>
@@ -701,11 +706,16 @@ footer .logo{color:var(--dk-text);font-size:17px}
       <div class="stage" id="stage">
         <div class="p3d" id="p3d">
           <img class="p-face" id="hero-shot" src="{{IMG:vent}}" width="600" height="1254" alt="Skjermbilde fra demoen, hull 8 på Nordvegen: flyfoto av hullet med fire spillere i fairway, og beskjeden «Vent med å slå» – 140 meter fra hvit tee til den bakerste, fire spillere innenfor 250 meter.">
-          <div class="chip3d c2" aria-hidden="true"><i class="rec"></i>Live · Tee-kamera</div>
-          <div class="chip3d c1" aria-hidden="true"><div><span class="pill pill-wait"><svg><use href="#i-hand"/></svg>Vent med å slå</span><small style="margin-top:6px">140 m til gruppa foran</small></div></div>
-          <div class="chip3d c4" aria-hidden="true"><svg><use href="#i-target"/></svg><div>250 m<small>regnet utslag</small></div></div>
-          <div class="chip3d c3" aria-hidden="true"><svg><use href="#i-qr"/></svg><div>Skann på tee<small>Ingen app å laste ned</small></div></div>
+          <span class="ann-dot" style="--x:.56;--y:.19" aria-hidden="true">1</span>
+          <span class="ann-dot" style="--x:.53;--y:.345" aria-hidden="true">2</span>
+          <span class="ann-dot" style="--x:.91;--y:.765" aria-hidden="true">3</span>
         </div>
+        <ol class="anns">
+          <li style="--x:.56;--y:.19"><b aria-hidden="true">1</b><div><strong>Kamerabildet</strong><span>Ser over toppen. Trykk for å se det stort.</span></div></li>
+          <li style="--x:.53;--y:.345"><b aria-hidden="true">2</b><div><strong>Gruppa foran</strong><span>Hver spiller er en markør på kartet.</span></div></li>
+          <li style="--x:.91;--y:.765"><b aria-hidden="true">3</b><div><strong>Svaret</strong><span>Vent eller klart – og avstanden fra din tee.</span></div></li>
+        </ol>
+        <p class="stage-cap">Ekte skjermbilde fra demoen · hull 8, Nordvegen</p>
       </div>
     </div>
 
