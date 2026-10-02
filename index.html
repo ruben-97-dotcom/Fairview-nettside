@@ -2072,76 +2072,118 @@ footer .logo{color:var(--dk-text);font-size:17px}
       var cc = new T.PerspectiveCamera(64, 1.6, 0.5, 6000);
       cc.position.copy(lensW); cc.lookAt(c.aimP.x, c.aimP.y - 3, c.aimP.z);
       var camImg = grab(800, 500, cc);
-      // 2) kart ovenfra
+      // 2) kart ovenfra, i samme utsnitt som hullvisningen i appen: tee nederst, green øverst
       var fog = scene.fog; scene.fog = null;
-      var MW = 560, MH = 470, cxm = (TX + GX) / 2 - 4, czm = (TZ + GZ) / 2, hh = (TZ - GZ) / 2 + 16, hw = hh * MW / MH;
+      var W = 600, H = 1254, SX = 19, SW = W - 38, MY0 = 180, MY1 = 1203, MH = MY1 - MY0, TEE_Y = 862, TOP_Y = 300;
+      var ppm = (TEE_Y - TOP_Y) / (TZ - GZ + 12), hw = SW / 2 / ppm, hh = MH / 2 / ppm;
+      var cxm = (TX + GX) / 2 + (c.groupC.x - (TX + GX) / 2) * .3, czm = TZ - ((TEE_Y - (MY0 + MY1) / 2) / ppm);
       var oc = new T.OrthographicCamera(-hw, hw, hh, -hh, 1, 3000);
       oc.position.set(cxm, 800, czm); oc.up.set(0, 0, -1); oc.lookAt(cxm, 0, czm);
-      var mapImg = grab(MW, MH, oc);
+      var mapImg = grab(SW, MH, oc);
       scene.fog = fog;
       renderer.setPixelRatio(pr); renderer.setSize(size.x, size.y, false);
       hide.forEach(function(o, k){ o.visible = vis[k]; });
 
-      var W = 600, H = 1254, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
-      var g = cv.getContext('2d'), F = 'ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif';
+      var cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+      var g = cv.getContext('2d'), F = '"Sora", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif';
+      var INK = '#0E3B2C', MUTED = '#5d6f64', BG = '#f3f5f0';
       function rr(x, y, w, h, r){ g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
-      function pill(x, y, text, bg, fg, size, dotCol){
-        g.font = '700 ' + size + 'px ' + F; var tw = g.measureText(text).width, pad = size * .75, dw = dotCol ? size * .9 : 0, w = tw + pad * 2 + dw, h = size * 1.9;
-        rr(x, y, w, h, h / 2); g.fillStyle = bg; g.fill();
-        if (dotCol){ g.fillStyle = dotCol; g.beginPath(); g.arc(x + pad + size * .25, y + h / 2, size * .28, 0, 7); g.fill(); }
-        g.fillStyle = fg; g.fillText(text, x + pad + dw, y + h / 2 + size * .36); return w;
+      function txt(t, x, y, font, col, align){ g.font = font; g.fillStyle = col; g.textAlign = align || 'left'; g.fillText(t, x, y); g.textAlign = 'left'; }
+      function chip(t, x, y, bg, fg, size, align){                 // avstandsmerke med tekst sentrert i (x, y)
+        g.font = '700 ' + size + 'px ' + F; var w = g.measureText(t).width + size * 1.2, h = size * 1.75, x0 = align === 'left' ? x : x - w / 2;
+        rr(x0, y - h / 2, w, h, h / 2); g.fillStyle = bg; g.fill(); txt(t, x0 + w / 2, y + size * .36, g.font, fg, 'center');
       }
-      rr(0, 0, W, H, 92); g.fillStyle = '#1b221d'; g.fill();
-      rr(14, 14, W - 28, H - 28, 80); g.fillStyle = '#e9f0ea'; g.fill();
-      g.save(); rr(14, 14, W - 28, H - 28, 80); g.clip();
-      rr(W / 2 - 80, 32, 160, 46, 23); g.fillStyle = '#050705'; g.fill();
-      g.fillStyle = '#0d1c13'; g.font = '600 28px ' + F; g.fillText('9:41', 66, 66);
-      // topplinje
-      rr(44, 104, 60, 60, 16); g.fillStyle = '#17955a'; g.fill();
-      g.fillStyle = '#fff'; g.fillRect(70, 118, 5, 32); g.beginPath(); g.moveTo(75, 120); g.lineTo(92, 127); g.lineTo(75, 134); g.fill();
-      g.fillStyle = '#0d1c13'; g.font = '750 34px ' + F; g.fillText('Fairview', 118, 146);
-      g.font = '800 44px ' + F; g.fillText('Hull 4', 44, 222);
-      g.font = '500 24px ' + F; g.fillStyle = '#5c7565'; g.fillText('Par ' + cfg.par + ' · ' + (Math.round(TOTAL / 2) * 2) + ' m', 196, 220);
-      // kamerabilde
-      var cy = 250, ch = 372;
-      g.save(); g.beginPath(); g.rect(14, cy, W - 28, ch); g.clip();
-      var sc = Math.max((W - 28) / camImg.width, ch / camImg.height), dw2 = camImg.width * sc, dh2 = camImg.height * sc;
-      g.drawImage(camImg, 14 + (W - 28 - dw2) / 2, cy + (ch - dh2) / 2, dw2, dh2);
-      var gr = g.createLinearGradient(0, cy + ch - 170, 0, cy + ch); gr.addColorStop(0, 'rgba(8,14,10,0)'); gr.addColorStop(1, 'rgba(8,14,10,.85)');
-      g.fillStyle = gr; g.fillRect(14, cy + ch - 170, W - 28, 170);
-      g.restore();
-      pill(34, cy + 18, 'LIVE · KAMERAPUNKT', 'rgba(13,28,19,.72)', '#fff', 17, '#e5484d');
-      g.fillStyle = 'rgba(233,240,234,.85)'; g.font = '700 18px ' + F; g.fillText('TIL DEN BAKERSTE I GRUPPA', 40, cy + ch - 98);
-      var dm = Math.floor(dval / 5) * 5;
-      g.fillStyle = '#fff'; g.font = '800 76px ' + F; g.fillText(String(dm), 38, cy + ch - 26);
-      var nw = g.measureText(String(dm)).width; g.font = '700 34px ' + F; g.fillText('m', 44 + nw, cy + ch - 28);
-      g.font = '700 21px ' + F; var pw = g.measureText('Vent med å slå').width + 60;
-      pill(W - 34 - pw, cy + ch - 78, 'Vent med å slå', '#f7e9d6', '#7a4a0a', 21, '#d98a1f');
-      // melding
-      g.fillStyle = '#0d1c13'; g.font = '600 22px ' + F;
-      g.fillText(group.length + ' spillere foran deg, innenfor 250 m.', 40, cy + ch + 46);
-      g.fillStyle = '#5c7565'; g.font = '500 20px ' + F; g.fillText('Kameraet står i skogkanten og ser mot toppen.', 40, cy + ch + 78);
-      // kart
-      var my = cy + ch + 106, mh = H - 60 - my, mx = 34, mw = W - 68;
-      g.save(); rr(mx, my, mw, mh, 26); g.clip();
-      var ms = Math.max(mw / MW, mh / MH), mdw = MW * ms, mdh = MH * ms, mox = mx + (mw - mdw) / 2, moy = my + (mh - mdh) / 2;
-      g.drawImage(mapImg, mox, moy, mdw, mdh);
-      g.fillStyle = 'rgba(233,240,234,.14)'; g.fillRect(mx, my, mw, mh);
-      function P(x, z){ return [mox + (x - (cxm - hw)) / (2 * hw) * mdw, moy + (z - (czm - hh)) / (2 * hh) * mdh]; }
-      var ppm = mdw / (2 * hw), tp = P(TX, TZ);
-      g.setLineDash([6, 7]); g.lineWidth = 2; g.strokeStyle = 'rgba(255,255,255,.75)';
-      [150, 250].forEach(function(rm){ g.beginPath(); g.arc(tp[0], tp[1], rm * ppm, 0, Math.PI * 2); g.stroke(); });
-      g.setLineDash([]);
-      [150, 250].forEach(function(rm){ pill(tp[0] - rm * ppm * .72 - 30, tp[1] - rm * ppm * .7 - 14, rm + ' m', 'rgba(255,255,255,.9)', '#0d1c13', 14); });
+      var dm = Math.floor(dval / 5) * 5, holeLen = Math.round(TOTAL / 2) * 2;
+
+      // telefonramme og skjerm
+      rr(0, 0, W, H, 92); var bz = g.createLinearGradient(0, 0, W, H); bz.addColorStop(0, '#5c6360'); bz.addColorStop(.3, '#23292a'); bz.addColorStop(.65, '#171b1c'); bz.addColorStop(1, '#4a514e'); g.fillStyle = bz; g.fill();
+      g.save(); rr(SX, SX, SW, H - 2 * SX, 76); g.clip(); g.fillStyle = BG; g.fillRect(0, 0, W, H);
+
+      // kartet (flyfoto av hullet) med avstandsringer rundt tee
+      g.drawImage(mapImg, SX, MY0, SW, MH);
+      function P(x, z){ return [SX + SW / 2 + (x - cxm) * ppm, (MY0 + MY1) / 2 + (z - czm) * ppm]; }
+      var tp = P(TX, TZ);
+      g.save(); g.beginPath(); g.rect(SX, MY0, SW, MH); g.clip();
+      [100, 150, 200, 250].forEach(function(m){
+        var r = m * ppm;
+        for (var a = -Math.PI * .98; a < -Math.PI * .02; a += 9 / r){
+          var px = tp[0] + Math.cos(a) * r, py = tp[1] + Math.sin(a) * r;
+          g.fillStyle = 'rgba(255,255,255,.92)'; g.beginPath(); g.arc(px, py, 2.3, 0, 7); g.fill();
+          g.strokeStyle = 'rgba(60,60,50,.35)'; g.lineWidth = .8; g.stroke();
+        }
+        var la = -Math.PI * .8, lx = tp[0] + Math.cos(la) * r, ly = tp[1] + Math.sin(la) * r;
+        if (lx < SX + 40){ la = Math.acos((SX + 46 - tp[0]) / r) * -1; lx = tp[0] + Math.cos(la) * r; ly = tp[1] + Math.sin(la) * r; }
+        chip(m + ' m', lx, ly, '#16201a', '#fff', 14);
+      });
+      // linja fra tee til den bakerste i gruppa
       var rp = P(c.groupRear.x, c.groupRear.z);
-      g.setLineDash([8, 6]); g.lineWidth = 3; g.strokeStyle = '#fff'; g.beginPath(); g.moveTo(tp[0], tp[1]); g.lineTo(rp[0], rp[1]); g.stroke(); g.setLineDash([]);
-      var mid = [(tp[0] + rp[0]) / 2, (tp[1] + rp[1]) / 2]; pill(mid[0] + 8, mid[1] - 16, dm + ' m', '#0d1c13', '#fff', 16);
-      group.forEach(function(p){ var q = P(p.position.x, p.position.z); g.fillStyle = '#fff'; g.beginPath(); g.arc(q[0], q[1], 11, 0, 7); g.fill(); g.fillStyle = '#d98a1f'; g.beginPath(); g.arc(q[0], q[1], 8, 0, 7); g.fill(); });
-      var up2 = P(UX, UZ); rr(up2[0] - 9, up2[1] - 9, 18, 18, 5); g.fillStyle = '#12784a'; g.fill(); g.strokeStyle = '#fff'; g.lineWidth = 2.5; g.stroke();
-      g.fillStyle = 'rgba(61,139,217,.3)'; g.beginPath(); g.arc(tp[0], tp[1], 20, 0, 7); g.fill();
-      g.fillStyle = '#fff'; g.beginPath(); g.arc(tp[0], tp[1], 12, 0, 7); g.fill(); g.fillStyle = '#3d8bd9'; g.beginPath(); g.arc(tp[0], tp[1], 9, 0, 7); g.fill();
+      g.strokeStyle = 'rgba(40,40,40,.35)'; g.lineWidth = 4.5; g.beginPath(); g.moveTo(tp[0], tp[1]); g.lineTo(rp[0], rp[1]); g.stroke();
+      g.strokeStyle = '#f4f4ef'; g.lineWidth = 2.5; g.stroke();
+      chip(dm + ' m', tp[0] + (rp[0] - tp[0]) * .42, tp[1] + (rp[1] - tp[1]) * .42, 'rgba(244,246,241,.95)', '#1d2620', 17);
+      // gruppa: markører på pinne, som i appen
+      group.map(function(p){ return P(p.position.x, p.position.z); }).sort(function(a, b){ return a[1] - b[1]; }).forEach(function(q){
+        g.strokeStyle = '#e1a43a'; g.lineWidth = 2.5; g.beginPath(); g.ellipse(q[0], q[1], 10, 6, 0, 0, 7); g.stroke();
+        g.strokeStyle = '#7a5a1c'; g.lineWidth = 2; g.beginPath(); g.moveTo(q[0], q[1]); g.lineTo(q[0], q[1] - 26); g.stroke();
+        g.fillStyle = '#f1b84a'; g.beginPath(); g.arc(q[0], q[1] - 30, 9, 0, 7); g.fill(); g.strokeStyle = '#a8761c'; g.lineWidth = 2; g.stroke();
+      });
       g.restore();
-      rr(W / 2 - 70, H - 42, 140, 8, 4); g.fillStyle = 'rgba(13,28,19,.8)'; g.fill();
+
+      // hull-merke og kamerabilde øverst i kartet
+      rr(37, 198, 126, 61, 12); g.fillStyle = 'rgba(30,34,26,.55)'; g.fill(); g.strokeStyle = 'rgba(255,255,255,.55)'; g.lineWidth = 1.5; g.stroke();
+      txt('Hull 4', 51, 226, '800 19px ' + F, '#fff'); txt('Par ' + cfg.par + ' · ' + holeLen + ' m', 51, 248, '500 13px ' + F, 'rgba(255,255,255,.9)');
+      var KX = 334, KY = 198, KW = 228, KH = 152;
+      g.save(); rr(KX, KY, KW, KH, 14); g.clip();
+      var ks = Math.max(KW / camImg.width, KH / camImg.height); g.drawImage(camImg, KX + (KW - camImg.width * ks) / 2, KY + (KH - camImg.height * ks) / 2, camImg.width * ks, camImg.height * ks);
+      g.fillStyle = 'rgba(8,20,14,.38)'; g.fillRect(KX, KY, KW, KH); g.restore();
+      rr(KX, KY, KW, KH, 14); g.strokeStyle = '#fff'; g.lineWidth = 3; g.stroke();
+      rr(KX + 10, KY + 10, 28, 20, 10); g.fillStyle = 'rgba(20,24,20,.7)'; g.fill(); g.fillStyle = '#e5484d'; g.beginPath(); g.arc(KX + 24, KY + 20, 6, 0, 7); g.fill();
+      var ix = KX + KW / 2, iy = KY + KH / 2 - 10;                    // kameraikon
+      g.strokeStyle = '#fff'; g.lineWidth = 2.2; rr(ix - 12, iy - 8, 24, 17, 4); g.stroke(); g.beginPath(); g.arc(ix, iy + .5, 5, 0, 7); g.stroke();
+      g.fillStyle = '#fff'; g.fillRect(ix - 5, iy - 11, 10, 3);
+      txt('Se kameraet', ix, iy + 32, '700 15px ' + F, '#fff', 'center');
+
+      // statuslinje og topplinje
+      g.fillStyle = BG; g.fillRect(0, 0, W, MY0);
+      txt('9:41', 62, 66, '600 21px ' + F, INK);
+      rr(W / 2 - 80, 34, 160, 47, 23.5); g.fillStyle = '#050705'; g.fill();
+      for (var sb = 0; sb < 4; sb++){ g.fillStyle = INK; rr(436 + sb * 7, 64 - 5 - sb * 3.2, 4.5, 5 + sb * 3.2, 1.2); g.fill(); }
+      g.strokeStyle = INK; g.lineWidth = 2.6; g.lineCap = 'round';
+      [10, 6.5, 3].forEach(function(r, k){ g.beginPath(); if (k < 2) g.arc(481, 66, r, -Math.PI * .78, -Math.PI * .22); else g.arc(481, 64, 1.6, 0, 7); k < 2 ? g.stroke() : (g.fillStyle = INK, g.fill()); });
+      rr(500, 52, 31, 15, 4.5); g.lineWidth = 1.6; g.strokeStyle = 'rgba(14,59,44,.55)'; g.stroke(); rr(503, 55, 23, 9, 2.5); g.fillStyle = INK; g.fill();
+      g.lineCap = 'butt';
+      g.strokeStyle = INK; g.lineWidth = 2.8; g.lineCap = 'round'; g.beginPath(); g.moveTo(70, 139); g.lineTo(48, 139); g.moveTo(57, 129); g.lineTo(47, 139); g.lineTo(57, 149); g.stroke(); g.lineCap = 'butt';
+      var lp = document.querySelector('#i-logo path');
+      if (lp && window.Path2D){
+        g.save(); g.translate(104, 120); g.scale(.49, .49); g.translate(-2.2, -4.8);
+        g.fillStyle = INK; g.fill(new Path2D(lp.getAttribute('d'))); rr(361.4, 9, 29, 74, 14.5); g.fill();
+        [[23.8, 'rgba(244,246,241,.22)'], [46, 'rgba(244,246,241,.22)'], [68.2, '#3CCB7F']].forEach(function(l){ g.fillStyle = l[1]; g.beginPath(); g.arc(375.9, l[0], 8.7, 0, 7); g.fill(); });
+        g.restore();
+      } else txt('SafeGolf', 104, 152, '800 34px ' + F, INK);
+      rr(334, 124, 137, 31, 15.5); g.fillStyle = '#f6e3c9'; g.fill(); txt('DEMODATA', 402.5, 145, '700 14px ' + F, '#7a4a0a', 'center');
+      g.fillStyle = '#e8ece5'; g.beginPath(); g.arc(529, 139, 28, 0, 7); g.fill();
+      g.strokeStyle = '#4d6356'; g.lineWidth = 2.2; g.beginPath(); g.arc(529, 139, 11, Math.PI * .1, Math.PI * 1.6); g.quadraticCurveTo(526, 147, 540, 141); g.stroke();
+
+      // bunnkortet med svaret
+      g.shadowColor = 'rgba(0,0,0,.18)'; g.shadowBlur = 18; g.shadowOffsetY = -2;
+      rr(36, 880, 527, 305, 24); g.fillStyle = '#fbfcf9'; g.fill(); g.shadowColor = 'transparent'; g.shadowBlur = 0; g.shadowOffsetY = 0;
+      rr(54, 898, 491, 147, 17); g.fillStyle = '#f8ead6'; g.fill(); g.strokeStyle = '#e5bd7a'; g.lineWidth = 2.5; g.stroke();
+      g.strokeStyle = '#d98a1f'; g.lineWidth = 2.6; g.beginPath(); g.arc(98, 946, 17, 0, 7); g.stroke(); g.beginPath(); g.moveTo(89, 946); g.lineTo(107, 946); g.stroke();
+      txt('Vent med å slå', 137, 942, '800 28px ' + F, '#6f4410');
+      txt(group.length + ' spillere innenfor 250 m', 137, 968, '500 15.5px ' + F, '#8a5a1c');
+      txt('Fra hvit tee', 523, 928, '700 15px ' + F, '#7a4a0a', 'right');
+      txt(String(dm), 523 - 26, 966, '800 40px ' + F, '#6f4410', 'right'); txt('m', 523, 966, '700 22px ' + F, '#6f4410', 'right');
+      g.fillStyle = 'rgba(122,74,10,.25)'; g.fillRect(76, 988, 447, 1.5);
+      txt('Eller slå så ballen stopper før ' + dm + ' m', 77, 1021, '700 17px ' + F, '#6f4410');
+      [[54, 'Kamera'], [306, '3D']].forEach(function(bt, k){
+        rr(bt[0], 1063, 239, 69, 18); g.fillStyle = '#e4e9e2'; g.fill();
+        var cx2 = bt[0] + 119.5 - (k ? 14 : 30);
+        g.strokeStyle = INK; g.lineWidth = 2;
+        if (!k){ rr(cx2 - 10, 1091, 20, 14, 3); g.stroke(); g.beginPath(); g.arc(cx2, 1098, 4, 0, 7); g.stroke(); }
+        else { g.beginPath(); g.moveTo(cx2, 1088); g.lineTo(cx2 + 10, 1093); g.lineTo(cx2 + 10, 1104); g.lineTo(cx2, 1109); g.lineTo(cx2 - 10, 1104); g.lineTo(cx2 - 10, 1093); g.closePath(); g.moveTo(cx2 - 10, 1093); g.lineTo(cx2, 1098); g.lineTo(cx2 + 10, 1093); g.moveTo(cx2, 1098); g.lineTo(cx2, 1109); g.stroke(); }
+        txt(bt[1], cx2 + 20, 1105, '700 21px ' + F, INK);
+      });
+      txt('Oppdatert nå · målt fra tee · veiledende', W / 2, 1163, '500 15px ' + F, MUTED, 'center');
+      rr(W / 2 - 100, H - 42, 200, 6, 3); g.fillStyle = 'rgba(14,59,44,.35)'; g.fill();
       g.restore();
       return cv;
     }
