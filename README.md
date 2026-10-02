@@ -1,6 +1,6 @@
-# Fairview – nettside
+# SafeGolf – nettside
 
-Salgsside for Fairview: kamera og app for blinde golfhull, rettet mot norske golfklubber. Leveres av Syntriq AS.
+Salgsside for SafeGolf (tidligere Fairview): kamera og app for blinde golfhull, rettet mot norske golfklubber. Leveres av Syntriq AS.
 
 `index.html` er hele nettsiden i én fil – all CSS, JavaScript, bilder og 3D-biblioteket (three.js) er bakt inn. Den kan åpnes direkte i nettleseren eller legges ut på hvilken som helst statisk hosting (GitHub Pages, Vercel, Netlify).
 
